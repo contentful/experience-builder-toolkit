@@ -16,6 +16,8 @@ jobs:
         with:
           runTests: false
           build: npm run build
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Run Linting
         run: npm run lint
       - name: Save build folder
