@@ -3,8 +3,9 @@ import React from 'react';
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     React.PropsWithChildren {
-  targetUrl?: string;
-  onNavigate?: (url: string) => void;
+  url?: string;
+  target?: string;
+  onNavigate?: (url: string, target?: string) => void;
   label?: string;
 }
 
@@ -13,18 +14,30 @@ export const Button: React.FC<ButtonProps> = ({
   label,
   onClick,
   onNavigate,
+  target,
+  url,
   ...props
 }) => {
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    if (onNavigate && props.targetUrl) {
-      onNavigate(props.targetUrl);
+    if (onNavigate && url) {
+      event.preventDefault();
+      onNavigate(url, target);
     }
     onClick && onClick(event);
   };
-  return (
-    <button onClick={handleClick} {...props}>
+
+  const button = (
+    <button data-url={url} data-target={target} onClick={handleClick} {...props}>
       {children || label}
     </button>
+  );
+
+  return url ? (
+    <a href={url} target={target}>
+      {button}
+    </a>
+  ) : (
+    button
   );
 };
 
