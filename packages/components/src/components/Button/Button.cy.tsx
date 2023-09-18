@@ -50,7 +50,7 @@ describe('<Button />', () => {
     cy.get('@onClickSpy').should('have.been.calledOnce');
   });
 
-  it('when url is not provide, it does not wrap an anchor tag around the button', () => {
+  it('when url is not provided, it does not wrap an anchor tag around the button', () => {
     cy.mount(<Button>Click Me!</Button>);
     cy.get('a').should('not.exist');
   });
@@ -67,8 +67,13 @@ describe('<Button />', () => {
     cy.get('button').contains('Click Me!');
   });
 
-  it('when there is a label and children, the children should be rendered', () => {
-    cy.mount(<Button label="Click Me!">Children text</Button>);
+  it('when there is a label and children, the label should be rendered', () => {
+    cy.mount(<Button label="Label text">Children text</Button>);
+    cy.get('button').contains('Label text');
+  });
+
+  it('when there is an empty label and children, the children should be rendered', () => {
+    cy.mount(<Button label="">Children text</Button>);
     cy.get('button').contains('Children text');
   });
 

@@ -28,7 +28,7 @@ export const Button: React.FC<ButtonProps> = ({
 
   const button = (
     <button data-url={url} data-target={target} onClick={handleClick} {...props}>
-      {children || label}
+      {label ? label : children}
     </button>
   );
 
