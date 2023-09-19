@@ -1,11 +1,4 @@
 const constants = {
-  infoBlock: {
-    block1: '/placeholders/currency.svg',
-    block2: '/placeholders/dashboard.svg',
-    block3: '/placeholders/cart.svg',
-  },
-  placeholderImage:
-    'https://images.ctfassets.net/tofsejyzyo24/5owPX1vp6cXDZr7QOabwzT/d5580f5b4dbad3f74c87ce2f03efa581/Image_container.png',
   thumbnails: {
     button:
       'http://images.ctfassets.net/tofsejyzyo24/7nSWHngZyMLp1kwp3uaIsL/d3b647f41e20f510644677dedd587cbb/button.png',
@@ -20,25 +13,6 @@ const constants = {
       'http://images.ctfassets.net/tofsejyzyo24/6DRBAjZUN4L2hwIkV4uM50/81e0a3a27fbada0c20f3420031ca85e5/info_block.png',
     duplex:
       'http://images.ctfassets.net/tofsejyzyo24/7cOHx0p0J1gUCFMPcoXnFg/73144735e3db345b101509bf707a56b1/Duplex.png',
-  },
-  placeholderRichtext: {
-    nodeType: 'document',
-    data: {},
-    content: [
-      {
-        nodeType: 'paragraph',
-        data: {},
-        content: [
-          {
-            nodeType: 'text',
-            value:
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-            marks: [],
-            data: {},
-          },
-        ],
-      },
-    ],
   },
 };
 
