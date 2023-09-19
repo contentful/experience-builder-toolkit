@@ -1,4 +1,6 @@
 const constants = {
+  placeholderImage:
+    'https://images.ctfassets.net/tofsejyzyo24/5owPX1vp6cXDZr7QOabwzT/d5580f5b4dbad3f74c87ce2f03efa581/Image_container.png',
   thumbnails: {
     button:
       'http://images.ctfassets.net/tofsejyzyo24/7nSWHngZyMLp1kwp3uaIsL/d3b647f41e20f510644677dedd587cbb/button.png',
