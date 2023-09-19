@@ -1,5 +1,5 @@
 import { ComponentRegistration } from '@contentful/experience-builder';
-import { ExperienceBuilderButton } from '..';
+import { ExperienceBuilderButton, ExperienceBuilderRichText } from '..';
 import { useEffect } from 'react';
 
 export default function useExperienceBuilderComponents(
@@ -10,6 +10,10 @@ export default function useExperienceBuilderComponents(
       {
         component: ExperienceBuilderButton,
         definition: ExperienceBuilderButton.ComponentDefinition,
+      },
+      {
+        component: ExperienceBuilderRichText,
+        definition: ExperienceBuilderRichText.ComponentDefinition,
       },
     ]);
   }, []);
