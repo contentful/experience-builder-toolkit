@@ -71,7 +71,7 @@ export function withExperienceBuilder<T extends object>(
     ...props
   }) => {
     const Tag = options.wrapContainerTag || 'div';
-    const ebProps = {
+    const cfProps = {
       'data-cf-node-id': dataCfNodeId,
       'data-cf-node-block-id': dataCfNodeBlockId,
       'data-cf-node-block-type': dataCfNodeBlockType,
@@ -80,13 +80,13 @@ export function withExperienceBuilder<T extends object>(
       onMouseUp,
     };
     const component = options.wrapComponent ? (
-      <Tag className={className} {...ebProps}>
+      <Tag className={className} {...cfProps}>
         <Component className={classes} {...(props as T)} />
       </Tag>
     ) : (
       React.createElement(Component, {
         className: classes + className ? classes + ' ' + className : undefined,
-        ...ebProps,
+        ...cfProps,
         ...(props as T),
       })
     );
