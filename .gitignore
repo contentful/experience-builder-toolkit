@@ -5,3 +5,6 @@ dist
 
 # Necessary for pushing to alternative npm registry
 .npmrc
+
+# Ignore built styles.css file in packages/components
+/packages/components/styles.css
