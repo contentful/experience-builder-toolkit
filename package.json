@@ -7,7 +7,7 @@
     "dev": "npm run dev --prefix ./packages/test-app",
     "lint": "npm run lint --workspaces --if-present",
     "lint.fix": "npm run lint.fix --workspaces --if-present",
-    "test": "npm run test --workspaces --if-present",
+    "test:component": "npm run test:component --workspaces --if-present",
     "storybook": "npm run storybook --prefix ./packages/components",
     "build-storybook": "npm run storybook --prefix component -- build"
   },
@@ -16,5 +16,9 @@
   "workspaces": [
     "packages/components",
     "packages/test-app"
-  ]
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "lerna": "^7.3.0"
+  }
 }
