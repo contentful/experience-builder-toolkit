@@ -2,6 +2,11 @@
   "name": "experience-builder-components",
   "version": "1.0.0",
   "description": "",
+  "homepage": "https://github.com/contentful/experience-builder-components#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/contentful/experience-builder-components.git"
+  },
   "scripts": {
     "build": "npm run build --workspaces --if-present",
     "dev": "npm run dev --prefix ./packages/test-app",
