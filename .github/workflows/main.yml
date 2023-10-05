@@ -45,6 +45,8 @@ jobs:
             packages/*/dist
             packages/*/build
       - name: Cleanup build cache
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           gh extension install actions/gh-actions-cache
           cacheKey = "build-cache-${{ github.run_id }}-${{ github.run_attempt }}"
