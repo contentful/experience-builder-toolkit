@@ -20,7 +20,8 @@
   "license": "ISC",
   "workspaces": [
     "packages/components",
-    "packages/test-app"
+    "packages/test-app",
+    "packages/create-experience-builder"
   ],
   "devDependencies": {
     "@commitlint/cli": "^17.7.2",
@@ -36,5 +37,9 @@
     "*.{json,yml,html}": [
       "prettier --write"
     ]
+  },
+  "dependencies": {
+    "@types/prompts": "^2.4.5",
+    "prompts": "^2.4.2"
   }
 }
