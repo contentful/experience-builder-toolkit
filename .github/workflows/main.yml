@@ -49,7 +49,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh extension install actions/gh-actions-cache
-          cacheKey = "build-cache-${{ github.run_id }}-${{ github.run_attempt }}"
-          echo "Deleting cache key: $cacheKey"
-          gh actions-cache delete $cacheKey --confirm
+          CACHE_KEY="build-cache-${{ github.run_id }}-${{ github.run_attempt }}"
+          echo "Deleting cache key: $CACHE_KEY"
+          gh actions-cache delete $CACHE_KEY --confirm
           echo "Done"
