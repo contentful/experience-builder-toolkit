@@ -39,6 +39,8 @@ jobs:
       - name: Build app
         run: |
           npm run build
+      - name: List components folder
+        run: ls -la packages/components
       - name: Save Build folders        
         uses: actions/cache/save@v3
         with:
