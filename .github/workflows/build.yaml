@@ -45,5 +45,6 @@ jobs:
           name: build-folders
           if-no-files-found: error
           path: |
-            packages/**/dist
-            packages/**/build
+            packages/*/dist
+            packages/*/build
+            ./.gitignore # This makes it so the entire path of the found built files is mantained
