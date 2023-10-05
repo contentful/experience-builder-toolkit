@@ -3,6 +3,8 @@ import { useExperienceBuilder, ExperienceRoot } from '@contentful/experience-bui
 import { useExperienceBuilderComponents } from '@contentful/experience-builder-components';
 import './App.css';
 import { ExternalSDKMode } from '@contentful/experience-builder/dist/types';
+import '@contentful/experience-builder-components/styles.css';
+
 
 const experienceTypeId = import.meta.env.VITE_EB_TYPE_ID || 'layout';
 
