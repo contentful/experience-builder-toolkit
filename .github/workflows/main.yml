@@ -25,6 +25,7 @@ jobs:
     secrets:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
   upload-artifact-cleanup:
+    if: ${{ always() }}
     needs: [install-build, check, publish]
     runs-on: ubuntu-latest
     steps:
