@@ -25,17 +25,13 @@ jobs:
       - name: Install dependencies
         run: |
           npm ci
-      - name: Download the build folders
+      - name: Restore the build folders
         uses: actions/cache/restore@v3
         with:
           path: |
             packages/*/dist
             packages/*/build
           key: build-cache-${{ github.run_id }}-${{ github.run_attempt }}
-      # - name: Download the build folders
-      #   uses: actions/download-artifact@v3
-      #   with:
-      #     name: build-folders
       - name: 'Version and publish'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

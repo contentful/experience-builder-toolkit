@@ -46,12 +46,3 @@ jobs:
             packages/*/dist
             packages/*/build
           key: build-cache-${{ github.run_id }}-${{ github.run_attempt }}
-      # - name: Save build folder
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: build-folders
-      #     if-no-files-found: error
-      #     path: |
-      #       packages/*/dist
-      #       packages/*/build
-      #       .gitignore # This makes it so the entire path of the found built files is mantained

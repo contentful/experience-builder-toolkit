@@ -24,3 +24,28 @@ jobs:
     uses: ./.github/workflows/publish.yaml
     secrets:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+  upload-artifact-cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Restore the build folders
+        uses: actions/cache/restore@v3
+        with:
+          path: |
+            packages/*/dist
+            packages/*/build
+          key: build-cache-${{ github.run_id }}-${{ github.run_attempt }}
+      - name: Save build folder to artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: built-assets
+          if-no-files-found: error
+          path: |
+            packages/*/dist
+            packages/*/build
+      - name: Cleanup build cache
+        run: |
+          gh extension install actions/gh-actions-cache
+          cacheKey = "build-cache-${{ github.run_id }}-${{ github.run_attempt }}"
+          echo "Deleting cache key: $cacheKey"
+          gh actions-cache delete $cacheKey --confirm
+          echo "Done"
