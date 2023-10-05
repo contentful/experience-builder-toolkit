@@ -1,0 +1,23 @@
+{
+  "name": "create-experience-builder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "tsc -w",
+    "prebuild": "npm uninstall -g && rimraf dist",
+    "build": "tsc",
+    "postbuild": "npm install -g",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "rimraf": "^5.0.5",
+    "typescript": "^5.2.2"
+  },
+  "bin": {
+    "create-experience-builder": "./dist/index.js"
+  }
+}
