@@ -29,6 +29,8 @@ jobs:
     needs: [install-build, check, publish]
     runs-on: ubuntu-latest
     steps:
+      - name: Check out code
+        uses: actions/checkout@v3
       - name: Restore the build folders
         uses: actions/cache/restore@v3
         with:
