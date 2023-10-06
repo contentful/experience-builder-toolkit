@@ -1,4 +1,4 @@
-import { blue, yellow } from 'kleur';
+import kleur from 'kleur';
 
 type ColorFunc = (str: string | number) => string;
 
@@ -13,24 +13,25 @@ export interface FrameworkVariant {
   name: string;
   display: string;
   color: ColorFunc;
-  customCommand?: string;
+  installCommand: string;
+  srcDir: string;
+  defaultDir: string;
 }
 
-export const FRAMEWORKS: Framework[] = [
+export const allFrameworks: Framework[] = [
   {
-    name: 'vanilla',
-    display: 'Vanilla',
-    color: yellow,
+    name: 'react',
+    display: 'React',
+    color: kleur.cyan,
     variants: [
       {
-        name: 'vanilla-ts',
-        display: 'TypeScript',
-        color: blue,
-      },
-      {
-        name: 'vanilla',
-        display: 'JavaScript',
-        color: yellow,
+        name: 'vite-ts',
+        display: 'React Vite + TypeScript',
+        color: kleur.white,
+        // customCommand: 'npm create vite@latest PROJECT_NAME',
+        installCommand: 'npm create vite@latest PROJECT_NAME -- --template react-ts',
+        srcDir: 'src',
+        defaultDir: 'react-eb-project',
       },
     ],
   },

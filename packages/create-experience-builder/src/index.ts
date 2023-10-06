@@ -5,6 +5,10 @@ import prompts from 'prompts';
 import kleur from 'kleur';
 import fs from 'fs';
 import path from 'path';
+import spawn from 'cross-spawn';
+import { fileURLToPath } from 'node:url';
+import { allFrameworks } from './models.js';
+import { intro, outro, select, spinner, text } from '@clack/prompts';
 
 const defaultDir = 'react-eb-project';
 
@@ -14,48 +18,103 @@ init().catch((e) => {
 
 async function init() {
   try {
-    const response = await prompts([
-      {
-        type: 'text',
-        name: 'projectName',
-        message: 'Project name:',
-        initial: defaultDir,
-        validate: (dir) => {
-          if (fs.existsSync(dir)) {
-            console.log(kleur.red(`\nDirectory ${dir} already exists`));
-            process.exit();
-          } else if (!isValidPackageName(dir)) {
-            console.log(kleur.red(`\n${dir} is not a valid package name`));
-            process.exit();
-          }
-          return true;
-        },
+    intro(
+      `👋 Welcome to the Contentful Experience Builder!\nWe will guide you through creating a new project that will be ready-to-go with Experience Builder!`
+    );
+
+    const projectType = await select({
+      message: 'Pick a project type.',
+      options: allFrameworks.map((framework) => {
+        return {
+          label: framework.color(framework.display),
+          value: framework.name,
+        };
+      }),
+    });
+
+    const framework = allFrameworks.find((f) => f.name === projectType)!;
+
+    const variantType = await select({
+      message: `What type of ${framework?.display} project?`,
+      options: framework.variants.map((variant) => {
+        return {
+          label: variant.color(variant.display),
+          value: variant.name,
+        };
+      }),
+    });
+
+    const variant = framework.variants.find((v) => v.name === variantType)!;
+
+    const projectName = (await text({
+      message: 'Where should we install the project?',
+      initialValue: variant.defaultDir,
+      validate(dir) {
+        if (dir.length === 0) return `Value is required!`;
+        if (fs.existsSync(dir)) {
+          return `Directory ${dir} already exists`;
+        } else if (!isValidPackageName(dir)) {
+          return `${dir} is not a valid package name`;
+        }
       },
-      {
-        type: () => false, // we only have react right now
-        name: 'framework',
-        message: 'Select a framework:',
-        initial: 0,
-        choices: [
-          {
-            title: kleur.blue('React'),
-            value: 'react',
-          },
-        ],
-      },
-    ]);
+    })) as string;
 
-    const { projectName, framework = 'react' } = response;
+    const installCommand = variant.installCommand.replace('PROJECT_NAME', projectName);
 
-    const projectDir = path.join(process.cwd(), projectName);
+    // // const projectDir = createDirectory(projectName);
 
-    fs.mkdirSync(projectDir, { recursive: true });
+    const projectDir = getProjectDir(projectName);
 
-    // console.log(response.value); // => 24
+    // // copyTemplate(projectDir, templateDir);
 
-    console.log(response); // => { value: 24 }
+    // // const pkgInfo = packageFromUserAgent(process.env.npm_config_user_agent);
+    // // const pkgManager = pkgInfo ? pkgInfo.name : 'npm';
 
-    // const getProjectName = () => (targetDir === '.' ? path.basename(path.resolve()) : targetDir);
+    const createProjSpinner = spinner();
+
+    createProjSpinner.start(
+      `Creating a new Contentful Experience Builder project using ${variant.display}...`
+    );
+
+    //sleep
+    // await new Promise((resolve) => setTimeout(resolve, 5000));
+
+    const installStatus = await runCommand(installCommand);
+
+    if (installStatus !== 0) {
+      console.error(`error running ${installCommand}`);
+      process.exit(1);
+    }
+
+    const templateDir = getTemplateDir(`${framework.name}-${variant.name}`);
+
+    copyTemplateFiles(projectDir, templateDir, variant.srcDir);
+
+    createProjSpinner.stop(`Done creating ${variant.display} project`);
+
+    const installDepsSpinner = spinner();
+
+    installDepsSpinner.start('Installing dependencies, this might take a minute ⏰');
+
+    //sleep
+    // await new Promise((resolve) => setTimeout(resolve, 5000));
+
+    const installEbLibsCommand = `npm i --prefix ${projectDir} @contentful/experience-builder @contentful/experience-builder-components`;
+
+    const ebLibStatus = await runCommand(installEbLibsCommand);
+
+    if (ebLibStatus !== 0) {
+      console.error(`error running ${installEbLibsCommand}`);
+      process.exit(1);
+    }
+
+    installDepsSpinner.stop('Done installing packages!');
+
+    outro(`Your project is ready and located in the ${projectName} folder.`);
+
+    // console.log({ status, status2 });
+
+    // copyTemplate(projectDir, templateDir);
   } catch (e) {
     console.log(e);
   }
@@ -63,4 +122,45 @@ async function init() {
 
 function isValidPackageName(projectName: string) {
   return /^(?:@[a-z\d\-*~][a-z\d\-*._~]*\/)?[a-z\d\-~][a-z\d\-._~]*$/.test(projectName);
+}
+
+function createDirectory(projectName: any) {
+  const projectDir = getProjectDir(projectName);
+  fs.mkdirSync(projectDir, { recursive: true });
+  return projectDir;
+}
+
+function copyTemplateFiles(projectDir: string, templateDir: string, srcDir: string) {
+  fs.rmSync(path.join(projectDir, srcDir), { recursive: true, force: true });
+  fs.cpSync(path.join(templateDir, srcDir), path.join(projectDir, srcDir), { recursive: true });
+  fs.cpSync(path.join(templateDir, '.env.local'), path.join(projectDir, '.env.local'));
+}
+
+function getProjectDir(projectName: string) {
+  return path.join(process.cwd(), projectName);
+}
+
+function getTemplateDir(framework: string) {
+  return path.join(fileURLToPath(import.meta.url), '../../templates', framework);
+}
+
+async function runCommand(command: string) {
+  return new Promise<number | null>((res) => {
+    const [commandName, ...args] = command.split(' ');
+    spawn(commandName, args, {
+      stdio: 'ignore',
+    }).on('exit', (code) => {
+      res(code);
+    });
+  });
+}
+
+function packageFromUserAgent(userAgent?: string) {
+  if (!userAgent) return undefined;
+  const pkgSpec = userAgent.split(' ')[0];
+  const pkgSpecArr = pkgSpec.split('/');
+  return {
+    name: pkgSpecArr[0],
+    version: pkgSpecArr[1],
+  };
 }

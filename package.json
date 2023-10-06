@@ -17,7 +17,7 @@
     "build-storybook": "npm run storybook --prefix component -- build"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "workspaces": [
     "packages/components",
     "packages/test-app",
