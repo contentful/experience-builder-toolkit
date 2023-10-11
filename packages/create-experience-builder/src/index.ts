@@ -1,22 +1,44 @@
 #! /usr/bin/env node
-/* eslint-disable @typescript-eslint/no-explicit-any */
 
-import prompts from 'prompts';
-import kleur from 'kleur';
-import fs from 'fs';
-import path from 'path';
-import spawn from 'cross-spawn';
-import { fileURLToPath } from 'node:url';
+import { confirm, intro, outro, select, spinner as Spinner, text, password } from '@clack/prompts';
+import yargs from 'yargs';
+import { CtflClient } from './ctflClient.js';
 import { allFrameworks } from './models.js';
-import { intro, outro, select, spinner, text } from '@clack/prompts';
+import { FsClient } from './fsClient.js';
 
-const defaultDir = 'react-eb-project';
+const args = await yargs(process.argv.slice(2))
+  .option('token', {
+    alias: 't',
+    type: 'string',
+    description: 'authToken to use',
+  })
+  //allows the option to cleanup at the end
+  .option('dev', {
+    alias: 'd',
+    type: 'boolean',
+    description: 'dev mode',
+    hidden: true,
+  })
+  .strict()
+  .parse();
 
 init().catch((e) => {
   console.error(e);
 });
 
 async function init() {
+  const spinner = Spinner();
+  const ctflClient = new CtflClient();
+  const fsClient = new FsClient();
+
+  if (args.token) {
+    const validToken = await ctflClient.setAuthToken(args.token);
+    if (!validToken) {
+      console.error('\nInvalid token\n');
+      process.exit(1);
+    }
+  }
+
   try {
     intro(
       `👋 Welcome to the Contentful Experience Builder!\nWe will guide you through creating a new project that will be ready-to-go with Experience Builder!`
@@ -51,70 +73,121 @@ async function init() {
       initialValue: variant.defaultDir,
       validate(dir) {
         if (dir.length === 0) return `Value is required!`;
-        if (fs.existsSync(dir)) {
+        if (fsClient.directoryExists(dir)) {
           return `Directory ${dir} already exists`;
+          //todo enable directory deleting
         } else if (!isValidPackageName(dir)) {
           return `${dir} is not a valid package name`;
         }
       },
     })) as string;
 
-    const installCommand = variant.installCommand.replace('PROJECT_NAME', projectName);
+    const shouldCreateSpace = await confirm({
+      message: 'Create a Contentful space in your org for experience builder?',
+    });
 
-    // // const projectDir = createDirectory(projectName);
+    if (shouldCreateSpace) {
+      if (!args.token) {
+        const confirmAnswer = await confirm({
+          message:
+            "Next, a browser window will open where you will log in (or sign up if you don't have an account) to Contentful, and authorize this CLI tool. Once done, you will see your access token, where you can copy it and paste it back into the command window. \n\nAre you ready to continue?",
+        });
 
-    const projectDir = getProjectDir(projectName);
+        if (!confirmAnswer) {
+          outro('Ok, bye!');
+          process.exit();
+        }
 
-    // // copyTemplate(projectDir, templateDir);
+        await ctflClient.getAuthToken();
 
-    // // const pkgInfo = packageFromUserAgent(process.env.npm_config_user_agent);
-    // // const pkgManager = pkgInfo ? pkgInfo.name : 'npm';
+        const authToken = await password({
+          message: 'Enter your Contentful management token from the browser window',
+          validate(token) {
+            if (token.length === 0) return `Value is required!`;
+          },
+        });
 
-    const createProjSpinner = spinner();
+        spinner.start('Validating token...');
 
-    createProjSpinner.start(
-      `Creating a new Contentful Experience Builder project using ${variant.display}...`
+        const validToken = await ctflClient.setAuthToken(authToken as string, true);
+
+        if (!validToken) {
+          console.error('\nInvalid token\n');
+          outro('Ok, bye!');
+          process.exit(1);
+        }
+
+        spinner.stop('Token validated!');
+      }
+    }
+
+    if (shouldCreateSpace) {
+      const orgs = await ctflClient.getOrgs();
+
+      const selectedOrg = await select<{ label: string; value: string }[], string>({
+        message: 'Select org to create space in.',
+        options: orgs.map((org) => {
+          return {
+            label: org.name,
+            value: org.id,
+          };
+        }),
+      });
+
+      const spaceName = await text({
+        message: 'Enter a name for your space',
+        placeholder: 'my-eb-space',
+        validate(name) {
+          if (name.length === 0) return `Value is required!`;
+          //todo validate that space name is a valid one for CF
+        },
+      });
+
+      spinner.start('Creating space...');
+
+      const space = await ctflClient.createSpace(spaceName as string, selectedOrg as string);
+
+      await ctflClient.createPreviewEnvironment(variant.devPort);
+
+      await ctflClient.createContentLayoutType();
+
+      await ctflClient.createContentEntry();
+
+      await ctflClient.createApiKeys();
+
+      spinner.stop(`Space ${space.name} created!`);
+    }
+
+    const projectDir = fsClient.getProjectDir(projectName);
+
+    spinner.start(
+      `Creating a new Contentful Experience Builder project using ${variant.display}, this might take a minute ⏰`
     );
 
-    //sleep
-    // await new Promise((resolve) => setTimeout(resolve, 5000));
+    await fsClient.createProject(variant, projectName);
 
-    const installStatus = await runCommand(installCommand);
+    spinner.stop('Done creating project and installing dependencies!');
 
-    if (installStatus !== 0) {
-      console.error(`error running ${installCommand}`);
-      process.exit(1);
+    //copy env file
+    if (shouldCreateSpace && ctflClient) {
+      fsClient.copyEnvFile(projectDir, ctflClient.getEnvFileData());
     }
-
-    const templateDir = getTemplateDir(`${framework.name}-${variant.name}`);
-
-    copyTemplateFiles(projectDir, templateDir, variant.srcDir);
-
-    createProjSpinner.stop(`Done creating ${variant.display} project`);
-
-    const installDepsSpinner = spinner();
-
-    installDepsSpinner.start('Installing dependencies, this might take a minute ⏰');
-
-    //sleep
-    // await new Promise((resolve) => setTimeout(resolve, 5000));
-
-    const installEbLibsCommand = `npm i --prefix ${projectDir} @contentful/experience-builder @contentful/experience-builder-components`;
-
-    const ebLibStatus = await runCommand(installEbLibsCommand);
-
-    if (ebLibStatus !== 0) {
-      console.error(`error running ${installEbLibsCommand}`);
-      process.exit(1);
-    }
-
-    installDepsSpinner.stop('Done installing packages!');
 
     outro(`Your project is ready and located in the ${projectName} folder.`);
 
-    // console.log({ status, status2 });
+    const shouldCleanup =
+      args.dev &&
+      (await confirm({
+        message: 'Cleanup?',
+      }));
 
-    // copyTemplate(projectDir, templateDir);
+    if (shouldCleanup) {
+      fsClient.deleteDirectory(projectDir);
+      if (shouldCreateSpace && ctflClient?.space) {
+        await ctflClient.deleteSpace();
+        await ctflClient.deleteAuthToken();
+      }
+    }
   } catch (e) {
     console.log(e);
   }
@@ -124,43 +197,4 @@ function isValidPackageName(projectName: string) {
   return /^(?:@[a-z\d\-*~][a-z\d\-*._~]*\/)?[a-z\d\-~][a-z\d\-._~]*$/.test(projectName);
 }
 
-function createDirectory(projectName: any) {
-  const projectDir = getProjectDir(projectName);
-  fs.mkdirSync(projectDir, { recursive: true });
-  return projectDir;
-}
-
-function copyTemplateFiles(projectDir: string, templateDir: string, srcDir: string) {
-  fs.rmSync(path.join(projectDir, srcDir), { recursive: true, force: true });
-  fs.cpSync(path.join(templateDir, srcDir), path.join(projectDir, srcDir), { recursive: true });
-  fs.cpSync(path.join(templateDir, '.env.local'), path.join(projectDir, '.env.local'));
-}
-
-function getProjectDir(projectName: string) {
-  return path.join(process.cwd(), projectName);
-}
-
-function getTemplateDir(framework: string) {
-  return path.join(fileURLToPath(import.meta.url), '../../templates', framework);
-}
-
-async function runCommand(command: string) {
-  return new Promise<number | null>((res) => {
-    const [commandName, ...args] = command.split(' ');
-    spawn(commandName, args, {
-      stdio: 'ignore',
-    }).on('exit', (code) => {
-      res(code);
-    });
-  });
-}
-
-function packageFromUserAgent(userAgent?: string) {
-  if (!userAgent) return undefined;
-  const pkgSpec = userAgent.split(' ')[0];
-  const pkgSpecArr = pkgSpec.split('/');
-  return {
-    name: pkgSpecArr[0],
-    version: pkgSpecArr[1],
-  };
-}
+// }
