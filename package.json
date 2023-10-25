@@ -20,7 +20,8 @@
   "license": "ISC",
   "workspaces": [
     "packages/components",
-    "packages/test-app"
+    "packages/test-app",
+    "packages/storybook-addon"
   ],
   "devDependencies": {
     "@commitlint/cli": "^17.7.2",
