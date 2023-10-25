@@ -17,10 +17,11 @@
     "build-storybook": "npm run storybook --prefix component -- build"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "workspaces": [
     "packages/components",
     "packages/test-app",
+    "packages/create-experience-builder",
     "packages/storybook-addon"
   ],
   "devDependencies": {
@@ -37,5 +38,9 @@
     "*.{json,yml,html}": [
       "prettier --write"
     ]
+  },
+  "dependencies": {
+    "@types/prompts": "^2.4.5",
+    "prompts": "^2.4.2"
   }
 }
