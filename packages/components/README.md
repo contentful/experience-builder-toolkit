@@ -4,12 +4,16 @@
 
 This folder contains the source code for the default/example components that can be used with Experience Builder. These components can be used as-is to kick start of building your experiences, or used as an example for building your own components.
 
+TOC:
+
 - [Components](#components)
 - [Getting started](#getting-started)
   - [Installation](#install-dependencies)
   - [Use the components](#use-the-components)
 - [Styling](#styling)
   - [Including default styles](#including-default-styles)
+  - [Adding custom styles](#adding-custom-styles)
+- [withExperienceBuilder util](#withexperiencebuilder-util)
 
 ## Components
 
@@ -73,5 +77,31 @@ For example, to style the `Button` component, you can do the following:
 }
 ```
 
-## 
+## withExperienceBuilder util
 
+We provide a helper function (as a [higher-order-component](https://legacy.reactjs.org/docs/higher-order-components.html)) to make it easier to register your own custom components with Experience Builder. This function helps ensure your component has all the required props and is properly registered with Experience Builder.
+
+### Usage
+
+```jsx
+import { withExperienceBuilder } from '@/utils/withExperienceBuilder';
+import { MyComponent } from './MyComponent';
+
+export const ExperienceBuilderMyComponent = withExperienceBuilder(
+  MyComponent,
+  // component registration configuration for EB
+  {
+    id: 'my-component',
+    name: 'My Component',
+    category: 'Custom',
+    variables: {
+      label: {
+        type: 'Text',
+        defaultValue: 'My Component',
+      },
+    },
+  },
+  // wrap the component with a container (defaults to false)
+  { wrapComponent: true }
+);
+```
