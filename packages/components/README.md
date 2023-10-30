@@ -128,6 +128,6 @@ export const ExperienceBuilderMyComponent = withExperienceBuilder(
 
 You can also provide the tag name the container will use (which defaults to 'div'):
 
-```
+```tsx
 { wrapComponent: true, wrapContainerTag: 'span' }
 ```
