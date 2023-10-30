@@ -2,22 +2,24 @@
 
 > Experience Builder is currently in a private alpha and not available publicly. If you are interested in participating in the alpha, please reach out to your Contentful account team.
 
-This folder contains the source code for the default/example components that can be used with Experience Builder. These components can be used as-is to kick start of building your experiences, or used as an example for building your own components.
+This folder contains the source code for the default/example components that can be used with Experience Builder. These components can be used as-is to kick start building your experiences, or used as an example for building your own components.
 
-TOC:
+## In this guide
 
 - [Components](#components)
 - [Getting started](#getting-started)
-  - [Installation](#install-dependencies)
-  - [Use the components](#use-the-components)
+  * [Installation](#installation)
+  * [Register the components with Experience Builder](#register-the-components-with-experience-builder)
 - [Styling](#styling)
-  - [Including default styles](#including-default-styles)
-  - [Adding custom styles](#adding-custom-styles)
+  * [Including default styles](#including-default-styles)
+  * [Adding custom styles](#adding-custom-styles)
 - [withExperienceBuilder util](#withexperiencebuilder-util)
+  * [Usage](#usage)
+
 
 ## Components
 
-For docs on each individual components, refer to the readme in the component's folder:
+The following components are available:
 
 - [Button](src/components/Button/README.md)
 - [Heading](src/components/Heading/README.md)
@@ -45,7 +47,7 @@ Import the `useExperienceBuilderComponents` hook from the `@contentful/experienc
 import { useExperienceBuilderComponents } from '@contentful/experience-builder-components';
 ```
 
-Next, call the hook, passing in the `defineComponents` method obtained from the call to the `userExperienceBuilder` hook:
+After the call to `useExperienceBuilder` (where you obtain the `defineComponents` method), pass in `defineComponents` to the `userExperienceBuilder` hook:
 
 ```jsx
 useExperienceBuilderComponents(defineComponents);
@@ -59,7 +61,7 @@ By default, the components are unstyled. This allows you to style the components
 
 ### Including default styles
 
-A set of default styles are included with the components. To include them, import the `styles.css` file from the `@contentful/experience-builder-components` package:
+A set of optional, default styles are included with the components. To include them, import the `styles.css` file from the `@contentful/experience-builder-components` package:
 
 ```jsx
 import '@contentful/experience-builder-components/styles.css';
@@ -77,6 +79,8 @@ For example, to style the `Button` component, you can do the following:
 }
 ```
 
+All components also support passing in custom class names via the `className` prop. This allows you to add your own class names to the component, which you can then use to style the component.
+
 ## withExperienceBuilder util
 
 We provide a helper function (as a [higher-order-component](https://legacy.reactjs.org/docs/higher-order-components.html)) to make it easier to register your own custom components with Experience Builder. This function helps ensure your component has all the required props and is properly registered with Experience Builder.
@@ -88,6 +92,7 @@ import { withExperienceBuilder } from '@/utils/withExperienceBuilder';
 import { MyComponent } from './MyComponent';
 
 export const ExperienceBuilderMyComponent = withExperienceBuilder(
+  // Your component
   MyComponent,
   // component registration configuration for EB
   {
@@ -101,7 +106,28 @@ export const ExperienceBuilderMyComponent = withExperienceBuilder(
       },
     },
   },
+);
+```
+
+### Container wrapping
+
+By default, the `withExperienceBuilder` function will not wrap your component in a container. However, it is often useful to have your component wrapped. If the components is wrapped, all the styles generated from Experience Builder will be applied to the wrapping container instead of the component itself. This will make it so the additional styles don't interfere with your component's styles.
+
+To wrap your component, pass in the `wrapComponent` option:
+
+```jsx
+export const ExperienceBuilderMyComponent = withExperienceBuilder(
+  // Your component
+  MyComponent,
+  // component registration configuration for EB
+  { /* EB config */ },
   // wrap the component with a container (defaults to false)
   { wrapComponent: true }
 );
+```
+
+You can also provide the tag name the container will use (which defaults to 'div'):
+
+```
+{ wrapComponent: true, wrapContainerTag: 'span' }
 ```
