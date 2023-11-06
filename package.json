@@ -21,7 +21,8 @@
   "workspaces": [
     "packages/components",
     "packages/test-app",
-    "packages/create-experience-builder"
+    "packages/create-experience-builder",
+    "packages/storybook-addon"
   ],
   "devDependencies": {
     "@commitlint/cli": "^17.7.2",
