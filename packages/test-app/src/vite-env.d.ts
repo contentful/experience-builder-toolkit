@@ -6,7 +6,6 @@ interface ImportMetaEnv {
   readonly VITE_ACCESS_TOKEN: string;
   readonly VITE_PREVIEW_ACCESS_TOKEN: string;
   readonly VITE_EB_TYPE_ID: string;
-  readonly VITE_MODE: string;
 }
 
 interface ImportMeta {
