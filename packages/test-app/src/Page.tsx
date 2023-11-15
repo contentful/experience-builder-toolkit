@@ -1,21 +1,19 @@
-import { useExperienceBuilder, ExperienceRoot } from '@contentful/experience-builder';
+import { defineComponents, ExperienceRoot, ExternalSDKMode } from '@contentful/experience-builder';
 import React, { useMemo } from 'react';
 import { createClient } from 'contentful';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useExperienceBuilderComponents } from '@contentful/experience-builder-components';
 import '@contentful/experience-builder-components/styles.css';
-import { ExternalSDKMode } from '@contentful/experience-builder/dist/types';
+import { useFetchExperience } from './hooks/useFetchExperience';
 
 const experienceTypeId = import.meta.env.VITE_EB_TYPE_ID || 'layout';
 
 const Page: React.FC = () => {
-  const { slug } = useParams<{ slug: string }>();
-  const [qs] = useSearchParams();
+  const localeCode = 'en-US';
+  const { slug = 'SLUG_MISSING_FROM_URL' } = useParams<{ slug: string }>();
 
-  const isPreview = qs.get('isPreview') === 'true';
-  const isEditor = true; // qs.get('isEditor') === 'true';
-
-  const mode = isEditor ? 'editor' : isPreview ? 'preview' : 'delivery';
+  const mode = (import.meta.env.VITE_MODE || 'delivery') as ExternalSDKMode;
+  const isPreview = mode === 'preview';
 
   const client = useMemo(() => {
     const space = import.meta.env.VITE_SPACE_ID || '';
@@ -29,23 +27,25 @@ const Page: React.FC = () => {
       space,
       environment,
       host,
-      accessToken: accessToken as string,
+      accessToken,
     });
   }, [isPreview]);
 
-  const { experience, defineComponents } = useExperienceBuilder({
-    experienceTypeId,
+  const experience = useFetchExperience({
     client,
-    mode: mode as ExternalSDKMode,
+    mode,
+    slug,
+    experienceTypeId,
+    localeCode,
   });
 
   useExperienceBuilderComponents(defineComponents);
 
-  return (
-    <>
-      <ExperienceRoot slug={slug || '/'} experience={experience} locale={'en-US'} />
-    </>
-  );
+  if (!experience) {
+    return null;
+  }
+
+  return <ExperienceRoot experience={experience} locale={localeCode} />;
 };
 
 export default Page;
