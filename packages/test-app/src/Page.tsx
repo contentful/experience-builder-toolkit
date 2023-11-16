@@ -1,4 +1,8 @@
-import { useFetchExperience, defineComponents, ExperienceRoot } from '@contentful/experience-builder';
+import {
+  useFetchExperience,
+  defineComponents,
+  ExperienceRoot,
+} from '@contentful/experience-builder';
 import React, { useEffect, useMemo } from 'react';
 import { createClient } from 'contentful';
 import { useParams, useSearchParams } from 'react-router-dom';
@@ -12,7 +16,7 @@ const Page: React.FC = () => {
   const [qs] = useSearchParams();
 
   // Configure Content Preview URL in your space settings to include "/{entry.fields.slug}"
-  const { slug = 'SLUG_MISSING_FROM_URL' } = useParams<{ slug: string }>();
+  const { slug = '/' } = useParams<{ slug: string }>();
 
   // Run preview mode when loaded in an iframe or if the url contains isPreview=true
   const isPreview = window.self !== window.top || qs.get('isPreview') === 'true';
@@ -40,10 +44,6 @@ const Page: React.FC = () => {
   }, [fetchBySlug, localeCode, slug]);
 
   useExperienceBuilderComponents(defineComponents);
-
-  if (!experience) {
-    return null;
-  }
 
   return <ExperienceRoot experience={experience} locale={localeCode} />;
 };
