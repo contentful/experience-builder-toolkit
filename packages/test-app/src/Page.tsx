@@ -26,7 +26,7 @@ const client = createClient({
 });
 
 const Page: React.FC = () => {
-  // Configure Content Preview URL in your space settings to include "/{entry.fields.slug}"
+  // Configure the Content Preview URL to include "/{entry.fields.slug}?isPreview=true"
   const { slug = '/' } = useParams<{ slug: string }>();
   const localeCode = 'en-US';
 
