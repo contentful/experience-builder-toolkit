@@ -12,8 +12,9 @@ import '@contentful/experience-builder-components/styles.css';
 
 const experienceTypeId = import.meta.env.VITE_EB_TYPE_ID || 'layout';
 
-const mode = (import.meta.env.VITE_MODE || 'delivery') as ExternalSDKMode;
-const isPreview = mode === 'preview' || window.location.search.includes('isPreview=true');
+const isPreview = window.location.search.includes('isPreview=true');
+
+const mode = isPreview ? 'preview' : ((import.meta.env.VITE_MODE || 'delivery') as ExternalSDKMode);
 
 const client = createClient({
   space: import.meta.env.VITE_SPACE_ID || '',

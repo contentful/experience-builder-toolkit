@@ -13,10 +13,11 @@ import './App.css';
 import '@contentful/experience-builder-components/styles.css';
 
 const experienceTypeId = import.meta.env.VITE_EB_TYPE_ID || 'layout';
-const mode = (import.meta.env.VITE_MODE || 'delivery') as ExternalSDKMode;
 
 // Run in preview mode if the url contains isPreview=true
-const isPreview = mode === 'preview' || window.location.search.includes('isPreview=true');
+const isPreview = window.location.search.includes('isPreview=true');
+
+const mode = isPreview ? 'preview' : ((import.meta.env.VITE_MODE || 'delivery') as ExternalSDKMode);
 
 // Use experience with locale 'en-US' and slug 'homePage'
 const localeCode = 'en-US';
