@@ -246,7 +246,7 @@ export class CtflClient {
         configurations: [
           {
             contentType: contentLayoutType,
-            url: `http://localhost:${port}/{entry.fields.slug}`,
+            url: `http://localhost:${port}/{entry.fields.slug}?isPreview=true`,
             enabled: true,
           },
         ],
@@ -324,7 +324,7 @@ export class CtflClient {
       accessToken: this.accessToken,
       previewAccessToken: this.previewAccessToken,
       typeId: contentLayoutType,
-      mode: 'preview',
+      mode: 'delivery',
     };
   }
 
