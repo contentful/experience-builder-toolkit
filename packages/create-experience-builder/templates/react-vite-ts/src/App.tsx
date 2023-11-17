@@ -41,7 +41,7 @@ function App() {
 
   useEffect(() => {
     fetchBySlug({ experienceTypeId, slug, localeCode });
-  }, [fetchBySlug, localeCode, slug]);
+  }, [fetchBySlug]);
 
   // Register optional default components
   useExperienceBuilderComponents(defineComponents);
