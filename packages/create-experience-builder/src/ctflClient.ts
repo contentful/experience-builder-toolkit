@@ -324,6 +324,7 @@ export class CtflClient {
       accessToken: this.accessToken,
       previewAccessToken: this.previewAccessToken,
       typeId: contentLayoutType,
+      mode: 'preview',
     };
   }
 

@@ -37,7 +37,8 @@ export class FsClient {
 VITE_SPACE_ID=${envFileData.spaceId}
 VITE_ACCESS_TOKEN=${envFileData.accessToken}
 VITE_PREVIEW_ACCESS_TOKEN=${envFileData.previewAccessToken}
-VITE_EB_TYPE_ID=${envFileData.typeId}`
+VITE_EB_TYPE_ID=${envFileData.typeId}
+VITE_MODE=${envFileData.mode}`
     );
   }
 

@@ -46,4 +46,5 @@ export type EnvFileData = {
   accessToken: string;
   previewAccessToken: string;
   typeId: string;
+  mode: string;
 };
