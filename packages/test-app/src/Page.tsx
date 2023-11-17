@@ -1,34 +1,33 @@
-import { useFetchExperience, defineComponents, ExperienceRoot } from '@contentful/experience-builder';
-import React, { useEffect, useMemo } from 'react';
+import {
+  useFetchExperience,
+  defineComponents,
+  ExperienceRoot,
+  ExternalSDKMode,
+} from '@contentful/experience-builder';
+import React, { useEffect } from 'react';
 import { createClient } from 'contentful';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useExperienceBuilderComponents } from '@contentful/experience-builder-components';
 import '@contentful/experience-builder-components/styles.css';
 
 const experienceTypeId = import.meta.env.VITE_EB_TYPE_ID || 'layout';
 
+const mode = (import.meta.env.VITE_MODE || 'delivery') as ExternalSDKMode;
+const isPreview = mode === 'preview' || window.location.search.includes('isPreview=true');
+
+const client = createClient({
+  space: import.meta.env.VITE_SPACE_ID || '',
+  environment: import.meta.env.VITE_ENVIRONMENT_ID || 'master',
+  host: isPreview ? 'preview.contentful.com' : 'cdn.contentful.com',
+  accessToken: isPreview
+    ? import.meta.env.VITE_PREVIEW_ACCESS_TOKEN
+    : import.meta.env.VITE_ACCESS_TOKEN,
+});
+
 const Page: React.FC = () => {
-  const localeCode = 'en-US';
-  const [qs] = useSearchParams();
-
   // Configure Content Preview URL in your space settings to include "/{entry.fields.slug}"
-  const { slug = 'SLUG_MISSING_FROM_URL' } = useParams<{ slug: string }>();
-
-  // Run preview mode when loaded in an iframe or if the url contains isPreview=true
-  const isPreview = window.self !== window.top || qs.get('isPreview') === 'true';
-
-  const mode = isPreview ? 'preview' : 'delivery';
-
-  const client = useMemo(() => {
-    return createClient({
-      space: import.meta.env.VITE_SPACE_ID || '',
-      environment: import.meta.env.VITE_ENVIRONMENT_ID || 'master',
-      host: isPreview ? 'preview.contentful.com' : 'cdn.contentful.com',
-      accessToken: isPreview
-        ? import.meta.env.VITE_PREVIEW_ACCESS_TOKEN
-        : import.meta.env.VITE_ACCESS_TOKEN,
-    });
-  }, [isPreview]);
+  const { slug = '/' } = useParams<{ slug: string }>();
+  const localeCode = 'en-US';
 
   const { experience, fetchBySlug } = useFetchExperience({
     client,
