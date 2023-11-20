@@ -22,7 +22,9 @@
     "packages/components",
     "packages/test-app",
     "packages/create-experience-builder",
-    "packages/storybook-addon"
+    "packages/storybook-addon",
+    "packages/visual-editor",
+    "packages/visual-editor-app"
   ],
   "devDependencies": {
     "@commitlint/cli": "^17.7.2",
