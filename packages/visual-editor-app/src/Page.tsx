@@ -1,10 +1,13 @@
-import { useExperienceBuilder, ExperienceRoot } from '@contentful/experience-builder';
+import {
+  useExperienceBuilder,
+  ExperienceRoot,
+  ExternalSDKMode,
+} from '@contentful/experience-builder';
 import React, { useMemo } from 'react';
 import { createClient } from 'contentful';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { useExperienceBuilderComponents } from '@contentful/experience-builder-components';
 import '@contentful/experience-builder-components/styles.css';
-import { ExternalSDKMode } from '@contentful/experience-builder';
 
 const experienceTypeId = import.meta.env.VITE_EB_TYPE_ID || 'layout';
 
