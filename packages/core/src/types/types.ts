@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * danv:
  * NOTE!! The code commented here will be used in future. We commented it out to remove not yet fully unsupported parts
