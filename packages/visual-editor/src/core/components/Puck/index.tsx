@@ -16,7 +16,7 @@ import {
   tryParseMessage,
   doesMismatchMessageSchema,
   OUTGOING_EVENTS,
-} from '@contentful/experience-builder';
+} from '@contentful/experience-builder-core';
 import { sendMessage } from '@/communication/sendMessage';
 export const tryParse = (data: any) => {
   try {

@@ -8,7 +8,7 @@ import { Flex } from './components/editor-components/Flex';
 import { Columns } from './components/editor-components/Columns';
 import { Container } from './components/editor-components/Container';
 import { sendMessage } from './communication/sendMessage';
-import { OUTGOING_EVENTS } from '@contentful/experience-builder';
+import { OUTGOING_EVENTS } from '@contentful/experience-builder-core';
 
 // Describe the initial data
 const initialData: Data = {

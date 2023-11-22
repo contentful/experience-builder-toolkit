@@ -26,7 +26,7 @@ export default [
         modules: true,
         plugins: [postcssImport()],
       }),
-      // peerDepsExternal(),
+      peerDepsExternal(),
       resolve(),
       commonjs(),
       injectProcessEnv({
@@ -35,7 +35,7 @@ export default [
       typescript({ tsconfig: './tsconfig.json' }),
       terser(),
     ],
-    // external: ['react', 'react-dom'],
+    external: ['react', 'react-dom'],
   },
   {
     input: 'src/index.tsx',

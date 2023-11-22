@@ -14,11 +14,13 @@
     "lint:fix": "npm run lint:fix --workspaces --if-present",
     "test:component": "npm run test:component --workspaces --if-present",
     "storybook": "npm run storybook --prefix ./packages/components",
-    "build-storybook": "npm run storybook --prefix component -- build"
+    "build-storybook": "npm run storybook --prefix component -- build",
+    "prepare": "relative-deps"
   },
   "author": "",
   "license": "MIT",
   "workspaces": [
+    "packages/core",
     "packages/components",
     "packages/test-app",
     "packages/create-experience-builder",
@@ -31,7 +33,11 @@
     "@commitlint/config-conventional": "^17.7.0",
     "husky": "^8.0.3",
     "lerna": "^7.3.0",
-    "lint-staged": "^14.0.1"
+    "lint-staged": "^14.0.1",
+    "relative-deps": "^1.0.7"
+  },
+  "relativeDependencies": {
+    "@contentful/experience-builder": "../experience-builder/packages/experience-builder-sdk/"
   },
   "lint-staged": {
     "*.{t,j}s?(x)": [
@@ -42,6 +48,7 @@
     ]
   },
   "dependencies": {
+    "@contentful/experience-builder": "^2.10.1",
     "@types/prompts": "^2.4.5",
     "prompts": "^2.4.2"
   }

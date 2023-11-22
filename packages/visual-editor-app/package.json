@@ -15,7 +15,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@contentful/experience-builder": "file:../../../experience-builder/packages/experience-builder-sdk/",
+    "@contentful/experience-builder": "^2.10.1",
     "@contentful/experience-builder-components": "*",
     "@contentful/experience-builder-editor": "*",
     "@contentful/experience-builder-storybook-addon": "*",
@@ -41,6 +41,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "eslint-plugin-storybook": "^0.6.15",
+    "relative-deps": "^1.0.7",
     "rimraf": "^5.0.5",
     "storybook": "^7.5.1",
     "typescript": "^5.0.2",
