@@ -92,7 +92,7 @@ export interface ComponentDefinitionVariableBase<T extends ComponentDefinitionVa
 //   : ComponentDefinitionVariableArrayOfPrimitives
 
 export type ComponentDefinitionVariable<
-  T extends ComponentDefinitionVariableType = ComponentDefinitionVariableType
+  T extends ComponentDefinitionVariableType = ComponentDefinitionVariableType,
   // K extends ComponentDefinitionVariableArrayItemType = ComponentDefinitionVariableArrayItemType
 > =
   // T extends 'Link'
@@ -102,7 +102,7 @@ export type ComponentDefinitionVariable<
   /*:*/ ComponentDefinitionVariableBase<T>;
 
 export type ComponentDefinition<
-  T extends ComponentDefinitionVariableType = ComponentDefinitionVariableType
+  T extends ComponentDefinitionVariableType = ComponentDefinitionVariableType,
 > = {
   id: string;
   name: string;
@@ -140,13 +140,13 @@ type CompositionComponentPropType =
   | 'ComponentValue';
 
 export type CompositionComponentPropValue<
-  T extends CompositionComponentPropType = CompositionComponentPropType
+  T extends CompositionComponentPropType = CompositionComponentPropType,
 > = T extends 'DesignValue'
   ? // The keys in valuesByBreakpoint are the breakpoint ids
     { type: T; valuesByBreakpoint: Record<string, CompositionVariableValueType> }
   : T extends 'BoundValue'
-  ? { type: T; path: string }
-  : { type: T; key: string };
+    ? { type: T; path: string }
+    : { type: T; key: string };
 
 // TODO: add conditional typing magic to reduce the number of optionals
 export type CompositionComponentNode = {
