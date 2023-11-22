@@ -1,11 +1,11 @@
-# `@contentful/experience-builder-types`
+# `@contentful/experience-builder-core`
 
-Type definitions and constants for the Contentful Experience Builder.
+Type definitions, constants, and shared methods for the Contentful Experience Builder.
 
 ## Usage
 
 ```
-import * as experienceBuilderTypes from 'experience-builder-types';
+import * as experienceBuilderCore from 'experience-builder-core';
 
 // TODO: DEMONSTRATE API
 ```
