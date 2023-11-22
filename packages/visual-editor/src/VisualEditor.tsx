@@ -15,48 +15,6 @@ import { ContentfulContainerDefinition } from '@components/editor-components/Con
 import { EditorModeEntityStore } from './core/EditorModeEntityStore';
 import dragState from './core/dragState';
 
-// // Describe the initial data
-// const initialData: Data = {
-//   content: [
-//     {
-//       type: 'Columns',
-//       props: {
-//         distribution: 'auto',
-//         columns: [{}, {}, {}],
-//         id: 'Columns-a82cb578-d3eb-4a16-a5ac-f5fad8a302db',
-//       },
-//     },
-//     {
-//       type: 'Flex',
-//       props: {
-//         items: [{}, {}],
-//         minItemWidth: 356,
-//         id: 'Flex-19f69963-5143-4549-aa82-294c74899cb3',
-//       },
-//     },
-
-//     {
-//       type: 'Flex',
-//       props: {
-//         items: [{}, {}],
-//         minItemWidth: 356,
-//         id: 'Flex-af8dd054-927a-4b22-b0ca-a6378bc7b357',
-//       },
-//     },
-//   ],
-//   root: {
-//     title: 'Test',
-//   },
-//   zones: {
-//     'Columns-a82cb578-d3eb-4a16-a5ac-f5fad8a302db:column-0': [],
-//     'Columns-a82cb578-d3eb-4a16-a5ac-f5fad8a302db:column-1': [],
-//     'Flex-af8dd054-927a-4b22-b0ca-a6378bc7b357:item-0': [],
-//     'Flex-af8dd054-927a-4b22-b0ca-a6378bc7b357:item-1': [],
-//     'Flex-19f69963-5143-4549-aa82-294c74899cb3:item-0': [],
-//     'Flex-19f69963-5143-4549-aa82-294c74899cb3:item-1': [],
-//   },
-// };
-
 const createData = (tree: CompositionTree): Data => {
   return {
     root: {
