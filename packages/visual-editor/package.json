@@ -1,12 +1,15 @@
 {
   "name": "@contentful/experience-builder-visual-editor",
-  "private": true,
-  "version": "0.0.1-dev-123",
+  "version": "0.0.1-dev126",
   "type": "module",
-  "main": "./dist/index.cjs",
+  "main": "./dist/index.js",
   "module": "./dist/index.js",
-  "style": "./dist/style.css",
   "types": "./dist/index.d.ts",
+  "files": [
+    "readme.md",
+    "package.json",
+    "dist/**/*.*"
+  ],
   "scripts": {
     "clean": "rimraf dist",
     "prebuild": "npm run clean",
@@ -17,12 +20,12 @@
     "lint:fix": "echo \"No linting configured until current code is cleaned up\""
   },
   "dependencies": {
-    "@contentful/experience-builder-core": "^0.0.1-dev123",
+    "@contentful/experience-builder-core": "file:../core",
     "@contentful/visual-sdk": "^1.0.0-alpha.32",
     "@hello-pangea/dnd": "^16.3.0",
     "event-emitter": "^0.3.5",
     "react-feather": "^2.0.10",
-    "react-router-dom": "^6.16.0",
+    "react-hotkeys-hook": "^4.4.1",
     "react-spinners": "^0.13.8",
     "use-debounce": "^10.0.0",
     "uuid": "^9.0.1"

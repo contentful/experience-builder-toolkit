@@ -1,6 +1,6 @@
 {
   "name": "@contentful/experience-builder-core",
-  "version": "0.0.1-dev123",
+  "version": "0.0.1-dev125",
   "description": "",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -8,6 +8,11 @@
     "type": "git",
     "url": "git+https://github.com/contentful/experience-builder-toolkit.git"
   },
+  "files": [
+    "readme.md",
+    "package.json",
+    "dist/**/*.*"
+  ],
   "scripts": {
     "clean": "rimraf dist",
     "prebuild": "npm run clean",
