@@ -14,8 +14,7 @@
     "lint:fix": "npm run lint:fix --workspaces --if-present",
     "test:component": "npm run test:component --workspaces --if-present",
     "storybook": "npm run storybook --prefix ./packages/components",
-    "build-storybook": "npm run storybook --prefix component -- build",
-    "prepare": "relative-deps"
+    "build-storybook": "npm run storybook --prefix component -- build"
   },
   "author": "",
   "license": "MIT",
