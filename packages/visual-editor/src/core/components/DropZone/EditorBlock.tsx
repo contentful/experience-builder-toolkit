@@ -21,7 +21,7 @@ import { buildCfStyles, calculateNodeDefaultHeight } from '@/utils/stylesUtils';
 import { transformContentValue } from '@/utils/transformers';
 import { getUnboundValues } from '@/utils/getUnboundValues';
 import { sendMessage } from '@/communication/sendMessage';
-import { CF_STYLE_ATTRIBUTES, OUTGOING_EVENTS } from '@contentful/experience-builder';
+import { CF_STYLE_ATTRIBUTES, OUTGOING_EVENTS } from '@contentful/experience-builder-core';
 import { useStyleTag } from '@/hooks/useStyleTag';
 import { useSelectedInstanceCoordinates } from '@/hooks/useSelectedInstanceCoordinates';
 import { omit } from 'lodash';

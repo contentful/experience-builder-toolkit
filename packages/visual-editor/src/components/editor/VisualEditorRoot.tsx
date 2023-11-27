@@ -8,7 +8,7 @@ import { useBreakpoints } from '../../hooks/useBreakpoints';
 import { CompositionTree, InternalSDKMode } from '../../types';
 import { useEditorContext } from './useEditorContext';
 import { VisualEditorContextProvider, designComponentsRegistry } from './VisualEditorContext';
-import { ComponentRegistration, OUTGOING_EVENTS } from '@contentful/experience-builder';
+import { ComponentRegistration, OUTGOING_EVENTS } from '@contentful/experience-builder-core';
 import { sendMessage } from '@/communication/sendMessage';
 
 type VisualEditorRootProps = {

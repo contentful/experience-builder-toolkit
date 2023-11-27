@@ -8,7 +8,7 @@ import {
   CompositionUnboundValues,
 } from '../types';
 
-import { ExperienceEntry } from '@contentful/experience-builder';
+import { ExperienceEntry } from '@contentful/experience-builder-core';
 
 export const getDataFromTree = (
   tree: CompositionTree

@@ -17,9 +17,10 @@ import {
   INCOMING_EVENTS,
   OUTGOING_EVENTS,
   SCROLL_STATES,
-} from '@contentful/experience-builder';
+  doesMismatchMessageSchema,
+  tryParseMessage,
+} from '@contentful/experience-builder-core';
 import { getDataFromTree } from '../../utils/utils';
-import { doesMismatchMessageSchema, tryParseMessage } from '../../utils/validation';
 import { sendSelectedComponentCoordinates } from '@/communication/sendSelectedComponentCoordinates';
 // import { Entry } from 'contentful';
 // import { DesignComponent } from '../../components/DesignComponent';

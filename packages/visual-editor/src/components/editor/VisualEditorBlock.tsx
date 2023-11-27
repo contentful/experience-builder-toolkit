@@ -9,7 +9,7 @@ import {
   CONTENTFUL_CONTAINER_ID,
   CONTENTFUL_SECTION_ID,
   DESIGN_COMPONENT_NODE_TYPES,
-} from '@contentful/experience-builder';
+} from '@contentful/experience-builder-core';
 
 import { getUnboundValues } from '../../utils/getUnboundValues';
 import { buildCfStyles, calculateNodeDefaultHeight } from '../../utils/stylesUtils';
@@ -23,7 +23,7 @@ import {
   CompositionDataSource,
   CompositionUnboundValues,
 } from '../../types';
-import { OUTGOING_EVENTS } from '@contentful/experience-builder';
+import { OUTGOING_EVENTS } from '@contentful/experience-builder-core';
 import { ContentfulContainer } from '../editor-components/ContentfulContainer/ContentfulContainer';
 // import { ImportedComponentErrorBoundary } from '../../components/ErrorBoundary';
 import { transformContentValue } from '../../utils/transformers';

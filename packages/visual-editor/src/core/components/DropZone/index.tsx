@@ -13,7 +13,7 @@ import { ResolveDesignValueType } from '@/hooks/useBreakpoints';
 import { EntityStore } from '@contentful/visual-sdk';
 import EditorBlock from './EditorBlock';
 import { ComponentData } from '@/core/types/Config';
-import { CF_STYLE_ATTRIBUTES, CONTENTFUL_CONTAINER_ID } from '@contentful/experience-builder';
+import { CF_STYLE_ATTRIBUTES, CONTENTFUL_CONTAINER_ID } from '@contentful/experience-builder-core';
 
 const getClassName = getClassNameFactory('DropZone', styles);
 
