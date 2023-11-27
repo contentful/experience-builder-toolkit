@@ -33,11 +33,7 @@
     "@commitlint/config-conventional": "^17.7.0",
     "husky": "^8.0.3",
     "lerna": "^7.4.2",
-    "lint-staged": "^14.0.1",
-    "relative-deps": "^1.0.7"
-  },
-  "relativeDependencies": {
-    "@contentful/experience-builder": "../experience-builder/packages/experience-builder-sdk/"
+    "lint-staged": "^14.0.1"
   },
   "lint-staged": {
     "*.{t,j}s?(x)": [
