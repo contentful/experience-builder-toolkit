@@ -5,7 +5,7 @@ import '../../styles/VisualEditorRoot.css';
 import { onComponentDropped } from '../../communication/onComponentDrop';
 import { EditorModeEntityStore } from '../../core/EditorModeEntityStore';
 import { useBreakpoints } from '../../hooks/useBreakpoints';
-import { CompositionTree, InternalSDKMode } from '../../types';
+import { CompositionTree, InternalSDKMode } from '@contentful/experience-builder-core';
 import { useEditorContext } from './useEditorContext';
 import { VisualEditorContextProvider, designComponentsRegistry } from './VisualEditorContext';
 import { ComponentRegistration, OUTGOING_EVENTS } from '@contentful/experience-builder-core';

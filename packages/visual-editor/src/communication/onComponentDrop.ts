@@ -1,4 +1,4 @@
-import { CompositionComponentNode } from '../types';
+import { CompositionComponentNode } from '@contentful/experience-builder-core';
 import { OUTGOING_EVENTS } from '@contentful/experience-builder-core';
 import { sendMessage } from './sendMessage';
 

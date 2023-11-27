@@ -22,7 +22,7 @@ import {
   CompositionVariableValueType,
   CompositionDataSource,
   CompositionUnboundValues,
-} from '../../types';
+} from '@contentful/experience-builder-core';
 import { OUTGOING_EVENTS } from '@contentful/experience-builder-core';
 import { ContentfulContainer } from '../editor-components/ContentfulContainer/ContentfulContainer';
 // import { ImportedComponentErrorBoundary } from '../../components/ErrorBoundary';

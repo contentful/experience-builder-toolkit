@@ -6,7 +6,7 @@ import {
   StyleProps,
   CompositionDataSource,
   CompositionUnboundValues,
-} from '../types';
+} from '@contentful/experience-builder-core';
 
 import { ExperienceEntry } from '@contentful/experience-builder-core';
 

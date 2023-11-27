@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 // Editor.jsx
 import { ComponentConfig, Puck, Config, Data } from './core';
 
-import { ComponentRegistration, CompositionTree } from './types';
+import { ComponentRegistration, CompositionTree } from '@contentful/experience-builder-core';
 import { VerticalSpace } from './components/editor-components/VerticalSpace';
 import { Flex } from './components/editor-components/Flex';
 import { Columns } from './components/editor-components/Columns';

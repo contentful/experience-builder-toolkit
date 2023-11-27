@@ -14,9 +14,8 @@ export default [
     output: [
       {
         file: packageJson.module,
-        format: 'cjs',
+        format: 'esm',
         sourcemap: true,
-        inlineDynamicImports: true, // <-- added
       },
     ],
     plugins: [

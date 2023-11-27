@@ -18,7 +18,10 @@ import {
 } from '@contentful/experience-builder-core';
 import type { EntityStore } from '@contentful/visual-sdk';
 import { sendMessage } from '@/communication/sendMessage';
-import { CompositionDataSource, CompositionUnboundValues } from '@/types';
+import {
+  CompositionDataSource,
+  CompositionUnboundValues,
+} from '@contentful/experience-builder-core';
 import { ResolveDesignValueType } from '@/hooks/useBreakpoints';
 import { useEditorContext } from '@components/editor/useEditorContext';
 import dragState from '@/core/dragState';

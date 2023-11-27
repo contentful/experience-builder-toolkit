@@ -7,7 +7,7 @@ import {
   CompositionVariableValueType,
   Link,
   StyleProps,
-} from '@/types';
+} from '@contentful/experience-builder-core';
 import { EntityStore } from '@contentful/visual-sdk';
 import React, { RefObject, useMemo } from 'react';
 import { DropZoneContext, DropZoneProvider } from './context';

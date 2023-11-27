@@ -1,3 +1,3 @@
-import { VisualEditor } from './components';
+import { VisualEditorRoot } from './VisualEditorRoot';
 
-export { VisualEditor };
+export default VisualEditorRoot;
