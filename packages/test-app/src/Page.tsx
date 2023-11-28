@@ -25,7 +25,7 @@ const client = createClient({
 
 export default function Page() {
   const localeCode = 'en-US';
-  const { slug = '' } = useParams<{ slug: string }>();
+  const { slug } = useParams<{ slug: string }>();
 
   const { experience, fetchBySlug } = useFetchExperience({ client, mode });
 
