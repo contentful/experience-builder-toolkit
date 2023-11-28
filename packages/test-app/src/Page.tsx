@@ -32,9 +32,11 @@ export default function Page() {
   useExperienceBuilderComponents(defineComponents);
 
   useEffect(() => {
-    if (slug) {
-      fetchBySlug({ experienceTypeId, slug, localeCode });
-    }
+    (async () => {
+      if (slug) {
+        await fetchBySlug({ experienceTypeId, slug, localeCode });
+      }
+    })();
   }, [fetchBySlug, slug]);
 
   return <ExperienceRoot experience={experience} locale={localeCode} />;
