@@ -8,7 +8,7 @@ import { createClient } from 'contentful';
 import { useExperienceBuilderComponents } from '@contentful/experience-builder-components';
 import '@contentful/experience-builder-components/styles.css';
 import { useParams } from 'react-router-dom';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 const isPreview = window.location.search.includes('isPreview=true');
 const mode = isPreview ? 'preview' : (import.meta.env.VITE_MODE as ExternalSDKMode) || 'delivery';
@@ -25,23 +25,15 @@ const client = createClient({
 
 export default function Page() {
   const localeCode = 'en-US';
-  const { slug } = useParams<{ slug: string }>();
-  const hasFetched = useRef(false);
+  const { slug = '' } = useParams<{ slug: string }>();
 
   const { experience, fetchBySlug } = useFetchExperience({ client, mode });
 
   useExperienceBuilderComponents(defineComponents);
 
   useEffect(() => {
-    const asyncFetch = async () => {
-      if (slug) {
-        await fetchBySlug({ experienceTypeId, slug, localeCode });
-      }
-    };
-
-    if (!hasFetched.current) {
-      asyncFetch();
-      hasFetched.current = true;
+    if (slug) {
+      fetchBySlug({ experienceTypeId, slug, localeCode });
     }
   }, [fetchBySlug, slug]);
 
