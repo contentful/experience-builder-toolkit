@@ -42,7 +42,9 @@
     ]
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.7",
     "@types/prompts": "^2.4.5",
-    "prompts": "^2.4.2"
+    "prompts": "^2.4.2",
+    "react-redux": "^8.1.3"
   }
 }
