@@ -11,12 +11,15 @@ import { getZoneId } from '../../lib/get-zone-id';
 import {
   CompositionDataSource,
   CompositionUnboundValues,
+  CONTENTFUL_CONTAINER_ID,
 } from '@contentful/experience-builder-core';
 import { ResolveDesignValueType } from '@/hooks/useBreakpoints';
 import { EntityStore } from '@contentful/visual-sdk';
 import EditorBlock from './EditorBlock';
 import { ComponentData } from '@/core/types/Config';
-import { CF_STYLE_ATTRIBUTES, CONTENTFUL_CONTAINER_ID } from '@contentful/experience-builder-core';
+import { useAppContext } from '../Puck/context';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
 
 const getClassName = getClassNameFactory('DropZone', styles);
 
@@ -49,13 +52,14 @@ function DropZoneEdit({
   ...rest
 }: DropZoneProps) {
   const ctx = useContext(dropZoneContext);
-
+  const { dispatch } = useAppContext();
+  const { draggedItem } = useSelector((state: RootState) => state.draggedItem);
   const {
     // These all need setting via context
     data,
     itemSelector,
     areaId,
-    draggedItem,
+
     placeholderStyle,
     registerZoneArea,
   } = ctx! || {};
@@ -127,7 +131,17 @@ function DropZoneEdit({
     }
 
     return 'vertical';
-  }, []);
+  }, [node]);
+
+  useEffect(() => {
+    dispatch({
+      type: 'dropzone_update_direction',
+      id: zoneCompound,
+      data: {
+        direction,
+      },
+    });
+  }, [direction, zoneCompound]);
 
   if (
     !ctx?.config ||
@@ -176,6 +190,8 @@ function DropZoneEdit({
   const selectedItem = itemSelector ? getItem(itemSelector, data) : null;
   const isAreaSelected = selectedItem && zoneArea === selectedItem.data.id;
 
+  console.log('zone', zoneCompound);
+
   return (
     <div
       className={getClassName({
@@ -188,7 +204,10 @@ function DropZoneEdit({
         isDisabled: !isEnabled,
         isAreaSelected,
         hasChildren: content.length > 0,
-      })}>
+      })}
+      style={{
+        position: 'relative',
+      }}>
       <Droppable droppableId={zoneCompound} direction={direction} isDropDisabled={!isEnabled}>
         {(provided, snapshot) => {
           return (
@@ -229,17 +248,7 @@ function DropZoneEdit({
                 );
               })}
               {provided?.placeholder}
-              {snapshot?.isDraggingOver && (
-                <div
-                  data-puck-placeholder
-                  style={{
-                    ...placeholderStyle,
-                    background: 'var(--puck-color-azure-5)',
-                    opacity: 0.3,
-                    zIndex: 0,
-                  }}
-                />
-              )}
+              {snapshot?.isDraggingOver && <div data-puck-placeholder style={placeholderStyle} />}
             </WrapperComponent>
           );
         }}
