@@ -19,6 +19,7 @@
   "author": "",
   "license": "MIT",
   "workspaces": [
+    "packages/core",
     "packages/components",
     "packages/test-app",
     "packages/create-experience-builder",
@@ -30,7 +31,7 @@
     "@commitlint/cli": "^17.7.2",
     "@commitlint/config-conventional": "^17.7.0",
     "husky": "^8.0.3",
-    "lerna": "^7.3.0",
+    "lerna": "^7.4.2",
     "lint-staged": "^14.0.1"
   },
   "lint-staged": {
@@ -43,6 +44,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.7",
+    "@contentful/experience-builder": "^2.10.1",
     "@types/prompts": "^2.4.5",
     "prompts": "^2.4.2",
     "react-redux": "^8.1.3"
