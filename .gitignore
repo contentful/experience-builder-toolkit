@@ -9,3 +9,4 @@ dist
 # Ignore built styles.css file in packages/components
 /packages/components/styles.css
 .env
+.env.local
