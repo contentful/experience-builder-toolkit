@@ -19,16 +19,19 @@
   "author": "",
   "license": "MIT",
   "workspaces": [
-    "packages/components",
-    "packages/test-app",
     "packages/create-experience-builder",
-    "packages/storybook-addon"
+    "packages/core",
+    "packages/components",
+    "packages/storybook-addon",
+    "packages/test-app",
+    "packages/visual-editor",
+    "packages/visual-editor-app"
   ],
   "devDependencies": {
     "@commitlint/cli": "^17.7.2",
     "@commitlint/config-conventional": "^17.7.0",
     "husky": "^8.0.3",
-    "lerna": "^7.3.0",
+    "lerna": "^7.4.2",
     "lint-staged": "^14.0.1"
   },
   "lint-staged": {
@@ -39,8 +42,5 @@
       "prettier --write"
     ]
   },
-  "dependencies": {
-    "@types/prompts": "^2.4.5",
-    "prompts": "^2.4.2"
-  }
+  "dependencies": {}
 }
