@@ -1,11 +1,11 @@
 {
-  "name": "experience-builder-components",
+  "name": "experience-builder-toolkit",
   "version": "1.0.0",
   "description": "",
-  "homepage": "https://github.com/contentful/experience-builder-components#readme",
+  "homepage": "https://github.com/contentful/experience-builder-toolkit#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/contentful/experience-builder-components.git"
+    "url": "git+https://github.com/contentful/experience-builder-toolkit.git"
   },
   "scripts": {
     "build": "npm run build --workspaces --if-present",
