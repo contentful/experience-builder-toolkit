@@ -1,0 +1,47 @@
+.hitbox {
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  height: 100%;
+  outline-offset: -1px;
+  outline: 1px solid transparent;
+  width: 100%;
+}
+
+.isEmpty {
+  height: 200px;
+}
+
+.hitbox {
+  position: absolute;
+  bottom: -18px;
+  width: 100%;
+  z-index: 1;
+  pointer-events: all !important;
+  height: 36px;
+  width: calc(100% + 100px);
+  left: -50px;
+}
+
+.block {
+  pointer-events: none;
+}
+
+.hoveringRoot {
+  outline: 1px solid red;
+}
+
+.isDragging {
+  outline: 1px dashed var(--exp-builder-blue500);
+}
+
+.isHovering {
+  /* outline: 1px solid var(--exp-builder-gray800); */
+}
+
+.isHovering > .overlay {
+  /* opacity: 1; */
+}

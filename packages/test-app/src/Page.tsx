@@ -39,7 +39,8 @@ const Page: React.FC = () => {
     mode: mode as ExternalSDKMode,
   });
 
-  useExperienceBuilderComponents(defineComponents);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  useExperienceBuilderComponents(defineComponents as any);
 
   return (
     <>
