@@ -12,6 +12,7 @@ import { Action, ReplaceAction } from './actions';
 import { CompositionComponentNode } from '@contentful/experience-builder-core';
 import { onComponentDropped } from '@/communication/onComponentDrop';
 import { getZoneId } from '../lib/get-zone-id';
+import { onComponentMoved } from '@/communication/onComponentMoved';
 
 // Restore unregistered zones when re-registering in same session
 export const zoneCache = {};
@@ -157,6 +158,8 @@ export const reduceData = (data: Data, action: Action, config: Config): Data => 
     }
 
     const newData = setupZone(data, action.destinationZone);
+
+    onComponentMoved(newData);
 
     return {
       ...data,

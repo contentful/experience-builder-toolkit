@@ -186,6 +186,8 @@ const VisualEditor: React.FC = () => {
     } as any;
   }, [components]);
 
+  console.log({ tree });
+
   if (!tree) {
     return;
   }

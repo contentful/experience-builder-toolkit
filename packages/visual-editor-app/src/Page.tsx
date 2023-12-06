@@ -12,7 +12,7 @@ import '@contentful/experience-builder-components/styles.css';
 import './styles.css';
 
 const isPreview = window.location.search.includes('isPreview=true');
-const mode = isPreview ? 'preview' : (import.meta.env.VITE_MODE as ExternalSDKMode) || 'delivery';
+const mode = 'preview'; isPreview ? 'preview' : (import.meta.env.VITE_MODE as ExternalSDKMode) || 'delivery';
 const experienceTypeId = import.meta.env.VITE_EB_TYPE_ID || 'layout';
 const localeCode = 'en-US';
 
