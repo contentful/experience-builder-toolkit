@@ -145,7 +145,9 @@ export const usePlaceholderStyle = () => {
         width: direction === 'horizontal' ? clientWidth : '100%',
         zIndex: 0,
         opacity: 0.4,
-        backgroundColor: '#0059C8',
+        backgroundColor: 'var(--exp-builder-blue200)',
+        outline: '1px dashed var(--exp-builder-blue600)',
+        outlineOffset: -1,
       });
     },
     [zones]

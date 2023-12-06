@@ -60,6 +60,7 @@ export function DropZone({
   const hoveringRootZone = hoveringSection ? hoveringSection === zoneId : isRootZone;
   const hoveringOverZone = hoveringZone === zoneId;
 
+  const isDestination = draggedDestinationId === zoneId;
   const hoveringOverSection = hoveringSection ? hoveringSection === sectionId : isRootZone;
   const hoveringOverParentZone = useMemo(() => {
     const hoveredParents = getZoneParents(hoveringZone);
@@ -142,8 +143,9 @@ export function DropZone({
               [styles.isEmpty]: isEmptyCanvas,
               [styles.isRoot]: isRootZone,
               [styles.hoveringRoot]: userIsDragging && hoveringRootZone,
-              [styles.isDragging]: userIsDragging || userWillDrag,
+              [styles.isDragging]: userIsDragging,
               [styles.isHovering]: hoveringOverZone && !userIsDragging,
+              [styles.isDestination]: isDestination,
             })}
             onMouseOver={(e) => {
               e.stopPropagation();

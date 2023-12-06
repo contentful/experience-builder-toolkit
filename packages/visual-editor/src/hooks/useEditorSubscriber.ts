@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { sendMessage } from '../communication/sendMessage';
 import { EditorModeEntityStore } from '../shared/EditorModeEntityStore';
@@ -40,7 +40,6 @@ export function useEditorSubscriber({
   initialComponentRegistry,
 }: VisualEditorSubsciberProps) {
   const updateTree = useTreeStore((state) => state.updateTree);
-  const tree = useTreeStore((state) => state.tree);
 
   const dataSource = useEditorStore((state) => state.dataSource);
   const unboundValues = useEditorStore((state) => state.unboundValues);
@@ -187,8 +186,12 @@ export function useEditorSubscriber({
         //   break;
         // }
         case INCOMING_EVENTS.ComponentDraggingChanged: {
-          // const { isDragging } = payload;
-          // setIsDragging(isDragging);
+          const { isDragging } = payload;
+
+          if (!isDragging) {
+            setComponentId('');
+            dragState.reset();
+          }
           break;
         }
         case INCOMING_EVENTS.UpdatedEntity: {
@@ -205,7 +208,7 @@ export function useEditorSubscriber({
           break;
         }
         case INCOMING_EVENTS.ComponentDragEnded: {
-          dragState.updateIsDragStartedOnParent(false);
+          dragState.reset();
           setComponentId('');
           break;
         }
