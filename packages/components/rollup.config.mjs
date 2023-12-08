@@ -3,8 +3,8 @@ import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
 import dts from 'rollup-plugin-dts';
 import terser from '@rollup/plugin-terser';
-import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
+import postcssImport from 'postcss-import';
 
 import packageJson from './package.json' assert { type: 'json' };
 
@@ -19,13 +19,15 @@ export default [
       },
     ],
     plugins: [
-      peerDepsExternal(),
+      postcss({
+        plugins: [postcssImport()],
+      }),
       resolve(),
       commonjs(),
       typescript({ tsconfig: './tsconfig.json' }),
       terser(),
     ],
-    external: [/node_modules/],
+    external: [/node_modules\/(?!tslib.*)/],
   },
   {
     input: 'src/styles.ts',

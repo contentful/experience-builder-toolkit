@@ -1,6 +1,6 @@
 {
   "name": "create-experience-builder",
-  "version": "0.0.1-alpha.0",
+  "version": "0.0.1-alpha.1",
   "description": "A CLI tool to get up and running with Contentful Experience Builder quickly",
   "homepage": "https://github.com/contentful/experience-builder-toolkit/tree/next/packages/create-experience-builder#readme",
   "repository": {
@@ -22,7 +22,7 @@
     "dev": "tsc -w",
     "prebuild": "npm uninstall -g && rimraf dist",
     "build": "tsc",
-    "lint": "eslint src --ext '.ts,.tsx,.js,.jsx' --max-warnings 0",
+    "lint": "eslint src --ext '.ts,.tsx,.js,.jsx' --max-warnings 0 --ignore-path ../../.eslintignore",
     "lint:fix": "eslint src --ext '.ts,.tsx,.js,.jsx' --fix",
     "postbuild": "npm install -g",
     "test": "echo \"Error: no test specified\" && exit 1"
