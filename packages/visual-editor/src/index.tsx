@@ -1,5 +1,5 @@
 import { VisualEditorRoot } from './components/VisualEditorRoot';
-import '@contentful/experience-builder-components/styles.css';
+import './global.css';
 
 // declare global {
 //   interface Window {
