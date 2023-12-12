@@ -12,21 +12,10 @@ import { useEditorStore } from '@/store/editor';
 import { useTreeStore } from '@/store/tree';
 import { simulateMouseEvent } from '@/shared/utils/simulateMouseEvent';
 
-// export type VisualEditorRootProps = {
-//   initialLocale: string;
-//   initialComponentRegistry: Map<string, ComponentRegistration>;
-// };
-
-// export const VisualEditorRoot = ({
-//   initialLocale,
-//   initialComponentRegistry,
-// }: VisualEditorRootProps) => {
-
 export const VisualEditorRoot = () => {
-  console.log('------ Rendering VisualEditorRoot ------');
+  console.log('---- VisualEditor->render ----');
 
-  useEditorSubscriber({ initialComponentRegistry: new Map(), initialLocale: 'en-US' });
-  // in editor mode locale can change via sendMessage from web app, hence we use the locale from props only as initial locale
+  useEditorSubscriber();
 
   const dataSource = useEditorStore((state) => state.dataSource);
   const locale = useEditorStore((state) => state.locale);

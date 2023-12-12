@@ -6,6 +6,7 @@ import {
   CompositionComponentNode,
   CompositionComponentPropValue,
   CompositionTree,
+  INTERNAL_EVENTS,
   Link,
 } from '@contentful/experience-builder-core';
 import {
@@ -23,10 +24,8 @@ import { useTreeStore } from '@/store/tree';
 import { useEditorStore } from '@/store/editor';
 import { useDraggedItemStore } from '@/store/draggedItem';
 
-type VisualEditorSubsciberProps = {
-  initialLocale: string;
-  initialComponentRegistry: Map<string, ComponentRegistration>;
-};
+export const initialComponentRegistry = new Map<string, ComponentRegistration>([]);
+const initialLocale = 'en-US';
 
 export const designComponentsRegistry = new Map<string, Link<'Entry'>>([]);
 export const setDesignComponents = (designComponents: Link<'Entry'>[]) => {
@@ -35,10 +34,7 @@ export const setDesignComponents = (designComponents: Link<'Entry'>[]) => {
   }
 };
 
-export function useEditorSubscriber({
-  initialLocale,
-  initialComponentRegistry,
-}: VisualEditorSubsciberProps) {
+export function useEditorSubscriber() {
   const updateTree = useTreeStore((state) => state.updateTree);
 
   const dataSource = useEditorStore((state) => state.dataSource);
@@ -63,17 +59,40 @@ export function useEditorSubscriber({
   };
 
   useEffect(() => {
-    initializeEditor({
-      initialLocale,
-      componentRegistry: initialComponentRegistry,
-      entityStore: new EditorModeEntityStore({
-        entities: [],
-        locale: locale,
-      }),
-    });
+    function onVisualEditorComponents(event: Event) {
+      const { componentRegistry } = (event as CustomEvent).detail;
+      if (componentRegistry) {
+        console.log('[VE::DEBUG] inilizeEditor', componentRegistry);
+        initializeEditor({
+          initialLocale,
+          componentRegistry: componentRegistry,
+          entityStore: new EditorModeEntityStore({
+            entities: [],
+            locale: locale,
+          }),
+        });
+      }
+    }
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener(INTERNAL_EVENTS.VisualEditorComponents, onVisualEditorComponents);
+      return () => {
+        window.removeEventListener(
+          INTERNAL_EVENTS.VisualEditorComponents,
+          onVisualEditorComponents
+        );
+      };
+    }
+  });
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent(INTERNAL_EVENTS.VisualEditorConnected));
+    }
   }, []);
 
   useEffect(() => {
+    sendMessage(INCOMING_EVENTS.RequestComponents);
     sendMessage(OUTGOING_EVENTS.RequestComponentTreeUpdate);
   }, []);
 
