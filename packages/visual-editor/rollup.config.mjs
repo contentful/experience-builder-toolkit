@@ -14,7 +14,10 @@ export default [
     output: [
       {
         file: packageJson.module,
+        // format: 'umd',
+        // format: 'cjs',
         format: 'esm',
+        // name: 'cfVisualEditor',
         sourcemap: true,
       },
     ],
@@ -32,6 +35,8 @@ export default [
       terser(),
     ],
     external: [/node_modules\/(?!tslib.*)/],
+    // external: ['react', 'react-dom'],
+    // external: [],
   },
   {
     input: 'src/index.tsx',

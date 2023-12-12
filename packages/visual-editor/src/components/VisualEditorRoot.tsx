@@ -20,6 +20,8 @@ export const VisualEditorRoot = ({
   initialLocale,
   initialComponentRegistry,
 }: VisualEditorRootProps) => {
+  console.log('------ Rendering VisualEditorRoot ------');
+
   useEditorSubscriber({ initialComponentRegistry, initialLocale });
   // in editor mode locale can change via sendMessage from web app, hence we use the locale from props only as initial locale
 
