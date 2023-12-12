@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { ComponentRegistration } from '@contentful/experience-builder-core';
+// import { componentRegistry as initialComponentRegistry } from '../core/componentRegistry';
+// import { ComponentRegistration } from '@contentful/experience-builder-core';
 import { useEditorSubscriber } from '@/hooks/useEditorSubscriber';
 import { OUTGOING_EVENTS } from '@contentful/experience-builder-core';
 import { EditorModeEntityStore } from '@/shared/EditorModeEntityStore';
@@ -11,18 +12,20 @@ import { useEditorStore } from '@/store/editor';
 import { useTreeStore } from '@/store/tree';
 import { simulateMouseEvent } from '@/shared/utils/simulateMouseEvent';
 
-export type VisualEditorRootProps = {
-  initialLocale: string;
-  initialComponentRegistry: Map<string, ComponentRegistration>;
-};
+// export type VisualEditorRootProps = {
+//   initialLocale: string;
+//   initialComponentRegistry: Map<string, ComponentRegistration>;
+// };
 
-export const VisualEditorRoot = ({
-  initialLocale,
-  initialComponentRegistry,
-}: VisualEditorRootProps) => {
+// export const VisualEditorRoot = ({
+//   initialLocale,
+//   initialComponentRegistry,
+// }: VisualEditorRootProps) => {
+
+export const VisualEditorRoot = () => {
   console.log('------ Rendering VisualEditorRoot ------');
 
-  useEditorSubscriber({ initialComponentRegistry, initialLocale });
+  useEditorSubscriber({ initialComponentRegistry: new Map(), initialLocale: 'en-US' });
   // in editor mode locale can change via sendMessage from web app, hence we use the locale from props only as initial locale
 
   const dataSource = useEditorStore((state) => state.dataSource);

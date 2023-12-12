@@ -14,10 +14,7 @@ export default [
     output: [
       {
         file: packageJson.module,
-        // format: 'umd',
-        // format: 'cjs',
         format: 'esm',
-        // name: 'cfVisualEditor',
         sourcemap: true,
       },
     ],
@@ -28,19 +25,45 @@ export default [
           return `import styleInject from 'style-inject';\nstyleInject(${cssVariableName});`;
         },
       }),
-
       resolve(),
       commonjs(),
       typescript({ tsconfig: './tsconfig.json' }),
       terser(),
     ],
     external: [/node_modules\/(?!tslib.*)/],
-    // external: ['react', 'react-dom'],
-    // external: [],
   },
   {
     input: 'src/index.tsx',
     output: [{ file: 'dist/index.d.ts', format: 'es' }],
+    plugins: [dts()],
+    external: [/.css/],
+  },
+  {
+    input: 'src/renderApp.tsx',
+    output: [
+      {
+        file: './dist/renderApp.js',
+        format: 'esm',
+        sourcemap: true,
+      },
+    ],
+    plugins: [
+      postcss({
+        plugins: [postcssImport()],
+        inject(cssVariableName) {
+          return `import styleInject from 'style-inject';\nstyleInject(${cssVariableName});`;
+        },
+      }),
+      resolve(),
+      commonjs(),
+      typescript({ tsconfig: './tsconfig.json' }),
+      terser(),
+    ],
+    external: [],
+  },
+  {
+    input: 'src/renderApp.tsx',
+    output: [{ file: 'dist/renderApp.d.ts', format: 'es' }],
     plugins: [dts()],
     external: [/.css/],
   },
