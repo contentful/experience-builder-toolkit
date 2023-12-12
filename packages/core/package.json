@@ -1,6 +1,6 @@
 {
   "name": "@contentful/experience-builder-core",
-  "version": "0.0.1-dev125",
+  "version": "0.0.1-pre-20231212T111240.0",
   "description": "",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -40,5 +40,6 @@
   },
   "dependencies": {
     "@contentful/visual-sdk": "^1.0.0-alpha.34"
-  }
+  },
+  "gitHead": "584a45e9c3eed3e7e7b5b9188ac87239d7371aa7"
 }
