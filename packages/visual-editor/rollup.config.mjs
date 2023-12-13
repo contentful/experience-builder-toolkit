@@ -65,10 +65,4 @@ export default [
     ],
     external: [],
   },
-  {
-    input: 'src/renderApp.tsx',
-    output: [{ file: 'dist/renderApp.d.ts', format: 'es' }],
-    plugins: [dts()],
-    external: [/.css/],
-  },
 ];
