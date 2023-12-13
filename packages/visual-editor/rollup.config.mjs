@@ -5,6 +5,7 @@ import dts from 'rollup-plugin-dts';
 import terser from '@rollup/plugin-terser';
 import postcss from 'rollup-plugin-postcss';
 import postcssImport from 'postcss-import';
+import injectProcessEnv from 'rollup-plugin-inject-process-env';
 
 import packageJson from './package.json' assert { type: 'json' };
 
@@ -56,6 +57,9 @@ export default [
       }),
       resolve(),
       commonjs(),
+      injectProcessEnv({
+        NODE_ENV: 'production',
+      }),
       typescript({ tsconfig: './tsconfig.json' }),
       terser(),
     ],
