@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import { componentRegistry as initialComponentRegistry } from '../core/componentRegistry';
-// import { ComponentRegistration } from '@contentful/experience-builder-core';
 import { useEditorSubscriber } from '@/hooks/useEditorSubscriber';
 import { OUTGOING_EVENTS } from '@contentful/experience-builder-core';
 import { EditorModeEntityStore } from '@/shared/EditorModeEntityStore';
@@ -13,8 +11,6 @@ import { useTreeStore } from '@/store/tree';
 import { simulateMouseEvent } from '@/shared/utils/simulateMouseEvent';
 
 export const VisualEditorRoot = () => {
-  console.log('---- VisualEditor->render ----');
-
   useEditorSubscriber();
 
   const dataSource = useEditorStore((state) => state.dataSource);

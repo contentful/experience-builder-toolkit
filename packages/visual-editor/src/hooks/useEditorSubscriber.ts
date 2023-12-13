@@ -62,7 +62,7 @@ export function useEditorSubscriber() {
     function onVisualEditorComponents(event: Event) {
       const { componentRegistry } = (event as CustomEvent).detail;
       if (componentRegistry) {
-        console.log('[VE::DEBUG] inilizeEditor', componentRegistry);
+        console.log('[VE::DEBUG] initialize editor', componentRegistry);
         initializeEditor({
           initialLocale,
           componentRegistry: componentRegistry,
@@ -75,7 +75,13 @@ export function useEditorSubscriber() {
     }
 
     if (typeof window !== 'undefined') {
+      // Listen for VisualEditorComponents internal event
       window.addEventListener(INTERNAL_EVENTS.VisualEditorComponents, onVisualEditorComponents);
+
+      // Dispatch VisualEditorConnected internal event
+      window.dispatchEvent(new CustomEvent(INTERNAL_EVENTS.VisualEditorConnected));
+
+      // Clean up the event listener
       return () => {
         window.removeEventListener(
           INTERNAL_EVENTS.VisualEditorComponents,
@@ -86,13 +92,6 @@ export function useEditorSubscriber() {
   });
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      window.dispatchEvent(new CustomEvent(INTERNAL_EVENTS.VisualEditorConnected));
-    }
-  }, []);
-
-  useEffect(() => {
-    sendMessage(INCOMING_EVENTS.RequestComponents);
     sendMessage(OUTGOING_EVENTS.RequestComponentTreeUpdate);
   }, []);
 
