@@ -79,21 +79,16 @@ export function useEditorSubscriber() {
       }
     };
 
-    if (typeof window !== 'undefined') {
-      // Listen for VisualEditorComponents internal event
-      window.addEventListener(INTERNAL_EVENTS.VisualEditorInitialize, onVisualEditorInitialize);
+    // Listen for VisualEditorComponents internal event
+    window.addEventListener(INTERNAL_EVENTS.VisualEditorInitialize, onVisualEditorInitialize);
 
-      // Dispatch Visual Editor Ready event
-      window.dispatchEvent(new CustomEvent(VISUAL_EDITOR_EVENTS.Ready));
+    // Dispatch Visual Editor Ready event
+    window.dispatchEvent(new CustomEvent(VISUAL_EDITOR_EVENTS.Ready));
 
-      // Clean up the event listener
-      return () => {
-        window.removeEventListener(
-          INTERNAL_EVENTS.VisualEditorInitialize,
-          onVisualEditorInitialize
-        );
-      };
-    }
+    // Clean up the event listener
+    return () => {
+      window.removeEventListener(INTERNAL_EVENTS.VisualEditorInitialize, onVisualEditorInitialize);
+    };
   });
 
   useEffect(() => {
