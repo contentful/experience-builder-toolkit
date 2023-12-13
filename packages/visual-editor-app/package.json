@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@contentful/experience-builder": "^2.10.1",
+    "@contentful/experience-builder-types": "^1.5.0",
     "@contentful/experience-builder-components": "file:../components",
     "@contentful/experience-builder-storybook-addon": "file:../storybook-addon",
     "react": "^18.2.0",
@@ -48,6 +49,7 @@
     "vite": "^4.4.5"
   },
   "relativeDependencies": {
-    "@contentful/experience-builder": "../../../experience-builder/packages/experience-builder-sdk/"
+    "@contentful/experience-builder": "../../../experience-builder/packages/experience-builder-sdk",
+    "@contentful/experience-builder-types": "../../../experience-builder/packages/experience-builder-types"
   }
 }
