@@ -7,10 +7,10 @@ import {
   CompositionComponentPropValue,
   CompositionTree,
   INTERNAL_EVENTS,
+  VISUAL_EDITOR_EVENTS,
   Link,
 } from '@contentful/experience-builder-core';
 import {
-  ComponentRegistration,
   INCOMING_EVENTS,
   OUTGOING_EVENTS,
   SCROLL_STATES,
@@ -23,9 +23,7 @@ import dragState from '@/shared/utils/dragState';
 import { useTreeStore } from '@/store/tree';
 import { useEditorStore } from '@/store/editor';
 import { useDraggedItemStore } from '@/store/draggedItem';
-
-export const initialComponentRegistry = new Map<string, ComponentRegistration>([]);
-const initialLocale = 'en-US';
+import { ComponentRegistration } from '@contentful/experience-builder-core';
 
 export const designComponentsRegistry = new Map<string, Link<'Entry'>>([]);
 export const setDesignComponents = (designComponents: Link<'Entry'>[]) => {
@@ -47,7 +45,7 @@ export function useEditorSubscriber() {
   const initializeEditor = useEditorStore((state) => state.initializeEditor);
   const setComponentId = useDraggedItemStore((state) => state.setComponentId);
 
-  const [locale, setLocale] = useState<string>(initialLocale);
+  const [locale, setLocale] = useState<string>('');
 
   const reloadApp = () => {
     sendMessage(OUTGOING_EVENTS.CanvasReload, {});
@@ -59,33 +57,40 @@ export function useEditorSubscriber() {
   };
 
   useEffect(() => {
-    function onVisualEditorComponents(event: Event) {
-      const { componentRegistry } = (event as CustomEvent).detail;
+    const onVisualEditorInitialize = (event) => {
+      if (!event.detail) return;
+      const { componentRegistry, locale: initialLocale } = event.detail;
+
       if (componentRegistry) {
-        console.log('[VE::DEBUG] initialize editor', componentRegistry);
+        console.log('[VE::DEBUG] initialize editor', { componentRegistry, initialLocale });
         initializeEditor({
           initialLocale,
-          componentRegistry: componentRegistry,
+          componentRegistry,
           entityStore: new EditorModeEntityStore({
             entities: [],
-            locale: locale,
+            locale: locale ? locale : initialLocale,
           }),
         });
       }
-    }
+
+      if (initialLocale) {
+        console.log('[VE::DEBUG] set locale:', initialLocale);
+        setLocale(initialLocale);
+      }
+    };
 
     if (typeof window !== 'undefined') {
       // Listen for VisualEditorComponents internal event
-      window.addEventListener(INTERNAL_EVENTS.VisualEditorComponents, onVisualEditorComponents);
+      window.addEventListener(INTERNAL_EVENTS.VisualEditorInitialize, onVisualEditorInitialize);
 
-      // Dispatch VisualEditorConnected internal event
-      window.dispatchEvent(new CustomEvent(INTERNAL_EVENTS.VisualEditorConnected));
+      // Dispatch Visual Editor Ready event
+      window.dispatchEvent(new CustomEvent(VISUAL_EDITOR_EVENTS.Ready));
 
       // Clean up the event listener
       return () => {
         window.removeEventListener(
-          INTERNAL_EVENTS.VisualEditorComponents,
-          onVisualEditorComponents
+          INTERNAL_EVENTS.VisualEditorInitialize,
+          onVisualEditorInitialize
         );
       };
     }
