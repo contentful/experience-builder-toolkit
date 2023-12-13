@@ -11,7 +11,7 @@ import { useTreeStore } from '@/store/tree';
 import { simulateMouseEvent } from '@/shared/utils/simulateMouseEvent';
 
 export const VisualEditorRoot = () => {
-  useEditorSubscriber();
+  const initialized = useEditorSubscriber();
 
   const dataSource = useEditorStore((state) => state.dataSource);
   const locale = useEditorStore((state) => state.locale);
@@ -78,7 +78,7 @@ export const VisualEditorRoot = () => {
     resolveEntities();
   }, [dataSource, entityStore, locale]);
 
-  if (!entityStore) return null;
+  if (!initialized || !entityStore) return null;
 
   return (
     <RootRenderer resolveDesignValue={resolveDesignValue} areEntitiesFetched={areEntitiesFetched} />

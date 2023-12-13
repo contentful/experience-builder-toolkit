@@ -23,7 +23,6 @@ import dragState from '@/shared/utils/dragState';
 import { useTreeStore } from '@/store/tree';
 import { useEditorStore } from '@/store/editor';
 import { useDraggedItemStore } from '@/store/draggedItem';
-import { ComponentRegistration } from '@contentful/experience-builder-core';
 
 export const designComponentsRegistry = new Map<string, Link<'Entry'>>([]);
 export const setDesignComponents = (designComponents: Link<'Entry'>[]) => {
@@ -46,6 +45,7 @@ export function useEditorSubscriber() {
   const setComponentId = useDraggedItemStore((state) => state.setComponentId);
 
   const [locale, setLocale] = useState<string>('');
+  const [initialized, setInitialized] = useState(false);
 
   const reloadApp = () => {
     sendMessage(OUTGOING_EVENTS.CanvasReload, {});
@@ -62,7 +62,6 @@ export function useEditorSubscriber() {
       const { componentRegistry, locale: initialLocale } = event.detail;
 
       if (componentRegistry) {
-        console.log('[VE::DEBUG] initialize editor', { componentRegistry, initialLocale });
         initializeEditor({
           initialLocale,
           componentRegistry,
@@ -71,10 +70,10 @@ export function useEditorSubscriber() {
             locale: locale ? locale : initialLocale,
           }),
         });
+        setInitialized(true);
       }
 
       if (initialLocale) {
-        console.log('[VE::DEBUG] set locale:', initialLocale);
         setLocale(initialLocale);
       }
     };
@@ -288,4 +287,6 @@ export function useEditorSubscriber() {
       clearTimeout(timeoutId);
     };
   }, []);
+
+  return initialized;
 }
