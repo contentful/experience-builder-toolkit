@@ -67,7 +67,7 @@ export function useEditorSubscriber() {
           componentRegistry,
           entityStore: new EditorModeEntityStore({
             entities: [],
-            locale: locale ? locale : initialLocale,
+            locale: locale || initialLocale,
           }),
         });
         setInitialized(true);
