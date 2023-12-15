@@ -267,12 +267,7 @@ type BaseDesignTokensDefinition = {
 export interface DesignTokensDefinition extends BaseDesignTokensDefinition {
   spacing?: Record<string, string>;
   colors?: Record<string, string>;
-  borders?: {
-    [key: string]: {
-      size: string;
-      color: string;
-    };
-  };
+  borders?: Record<string, { size: string; color: string }>;
 }
 
 export type ExperienceEntry = {
