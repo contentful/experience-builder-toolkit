@@ -1,10 +1,15 @@
-import { useFetchExperience, ExperienceRoot } from '@contentful/experience-builder';
+import {
+  useFetchExperience,
+  ExperienceRoot,
+  defineDesignTokens,
+} from '@contentful/experience-builder';
 import { ExternalSDKMode, VisualEditorMode } from '@contentful/experience-builder-core';
 import { createClient } from 'contentful';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import '@contentful/experience-builder-components/styles.css';
 import './styles.css';
+import { designTokens } from './utils/constants';
 
 const isPreview = window.location.search.includes('isPreview=true');
 const mode = isPreview ? 'preview' : (import.meta.env.VITE_MODE as ExternalSDKMode) || 'delivery';
@@ -29,6 +34,8 @@ const client = createClient({
 export default function Page() {
   const { slug = 'homePage' } = useParams<{ slug: string }>();
   const { experience, fetchBySlug } = useFetchExperience({ client, mode });
+
+  defineDesignTokens(designTokens);
 
   useEffect(() => {
     if (slug) {
