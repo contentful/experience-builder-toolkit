@@ -260,6 +260,21 @@ export type Composition = {
   componentSettings?: ExperienceComponentSettings;
 };
 
+type BaseDesignTokensDefinition = {
+  [key: string]: string | BaseDesignTokensDefinition | undefined;
+};
+
+export interface DesignTokensDefinition extends BaseDesignTokensDefinition {
+  spacing?: Record<string, string>;
+  colors?: Record<string, string>;
+  borders?: {
+    [key: string]: {
+      size: string;
+      color: string;
+    };
+  };
+}
+
 export type ExperienceEntry = {
   sys: Entry['sys'];
   fields: Composition;
