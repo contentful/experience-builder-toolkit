@@ -2,6 +2,7 @@ node_modules
 dist
 /reports
 /apps
+reports
 
 # Necessary for pushing to alternative npm registry
 .npmrc
