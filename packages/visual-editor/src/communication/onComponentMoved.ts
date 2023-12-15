@@ -1,5 +1,4 @@
-import { OUTGOING_EVENTS } from '@contentful/experience-builder-core';
-import { sendMessage } from './sendMessage';
+import { OUTGOING_EVENTS, sendMessage } from '@contentful/experience-builder-core';
 
 export const onComponentMoved = (options: {
   nodeId: string;

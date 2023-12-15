@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
-
-import { sendMessage } from '../communication/sendMessage';
-import { EditorModeEntityStore } from '../shared/EditorModeEntityStore';
+import { EditorModeEntityStore, sendMessage } from '@contentful/experience-builder-core';
 import {
   CompositionComponentNode,
   CompositionComponentPropValue,

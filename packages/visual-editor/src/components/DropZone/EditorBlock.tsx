@@ -6,8 +6,7 @@ import {
 import React from 'react';
 import styles from './styles.module.css';
 import { DraggableComponent } from '../Draggable/DraggableComponent';
-import { sendMessage } from '@/communication/sendMessage';
-import { OUTGOING_EVENTS } from '@contentful/experience-builder-core';
+import { OUTGOING_EVENTS, sendMessage } from '@contentful/experience-builder-core';
 import { useSelectedInstanceCoordinates } from '@/hooks/useSelectedInstanceCoordinates';
 import { useEditorStore } from '@/store/editor';
 import { useComponent } from '@/hooks/useComponent';

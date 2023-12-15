@@ -2,9 +2,9 @@ import {
   ComponentRegistration,
   CompositionDataSource,
   CompositionUnboundValues,
+  EditorModeEntityStore,
 } from '@contentful/experience-builder-core';
 import { create } from 'zustand';
-import { EditorModeEntityStore } from '@/shared/EditorModeEntityStore';
 
 export interface InitEditorParams {
   componentRegistry: Map<string, ComponentRegistration>;
