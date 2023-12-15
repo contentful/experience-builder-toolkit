@@ -8,7 +8,7 @@ import { ResolveDesignValueType } from '@/hooks/useBreakpoints';
 import dragState from '@/shared/utils/dragState';
 import { onDrop } from '@/shared/utils/onDrop';
 import { usePlaceholderStyle } from '@/hooks/usePlaceholderStyle';
-import { ROOT_ID } from '@/shared/utils/constants';
+import { ROOT_ID } from '@/types/constants';
 import { useTreeStore } from '@/store/tree';
 import { useDraggedItemStore } from '@/store/draggedItem';
 import { useEditorStore } from '@/store/editor';
