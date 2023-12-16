@@ -1,5 +1,5 @@
 import { CompositionComponentNode, CompositionTree } from '@contentful/experience-builder-core';
-import { ROOT_ID } from '../../types/constants';
+import { ROOT_ID } from './constants';
 
 export type ItemSelector = {
   id: string;
