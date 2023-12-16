@@ -1,5 +1,5 @@
 import { onComponentDropped } from '@/communication/onComponentDrop';
-import { getItem } from '../../types/getItem';
+import { getItem } from '../../utils/getItem';
 import { CompositionComponentNode, CompositionTree } from '@contentful/experience-builder-core';
 import { generateId } from '../../utils/generate-id';
 import { ROOT_ID } from '../../types/constants';
