@@ -10,7 +10,7 @@ import { RootRenderer } from './RootRenderer/RootRenderer';
 import { useBreakpoints } from '@/hooks/useBreakpoints';
 import { useEditorStore } from '@/store/editor';
 import { useTreeStore } from '@/store/tree';
-import { simulateMouseEvent } from '@/shared/utils/simulateMouseEvent';
+import { simulateMouseEvent } from '@/utils/simulateMouseEvent';
 
 export const VisualEditorRoot = () => {
   const initialized = useEditorSubscriber();
