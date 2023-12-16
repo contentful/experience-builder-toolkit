@@ -1,5 +1,4 @@
 import React from 'react';
-import { buildCfStyles, calculateNodeDefaultHeight } from '@/shared/utils/stylesUtils';
 import { useEditorStore } from '@/store/editor';
 import {
   CF_STYLE_ATTRIBUTES,
@@ -9,6 +8,9 @@ import {
   CompositionVariableValueType,
   Link,
   StyleProps,
+  buildCfStyles,
+  calculateNodeDefaultHeight,
+  transformContentValue,
 } from '@contentful/experience-builder-core';
 import { useMemo } from 'react';
 import { useShallow } from 'zustand/react/shallow';
@@ -16,7 +18,6 @@ import { useStyleTag } from './useStyleTag';
 import { omit } from 'lodash';
 import { ResolveDesignValueType } from './useBreakpoints';
 import { getUnboundValues } from '@/utils/getUnboundValues';
-import { transformContentValue } from '@/shared/utils/transformers';
 
 import { DropZone } from '@components/DropZone/Dropzone';
 
