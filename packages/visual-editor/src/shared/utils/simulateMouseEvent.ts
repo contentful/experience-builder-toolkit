@@ -1,5 +1,5 @@
 import { DRAGGABLE_HEIGHT, DRAGGABLE_WIDTH } from '../../types/constants';
-import dragState from './dragState';
+import dragState from '../../utils/dragState';
 
 function updateDraggableElement(x: number, y: number) {
   const container = document.querySelector('#component-list') as HTMLDivElement;

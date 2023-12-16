@@ -5,7 +5,7 @@ import {
   EditorModeEntityStore,
   sendMessage,
 } from '@contentful/experience-builder-core';
-import dragState from '@/shared/utils/dragState';
+import dragState from '@/utils/dragState';
 import { RootRenderer } from './RootRenderer/RootRenderer';
 import { useBreakpoints } from '@/hooks/useBreakpoints';
 import { useEditorStore } from '@/store/editor';

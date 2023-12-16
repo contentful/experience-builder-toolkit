@@ -5,7 +5,7 @@ import { DropZone } from '../DropZone/Dropzone';
 import DraggableContainer from '../Draggable/DraggableComponentList';
 import { CompositionTree, OUTGOING_EVENTS, sendMessage } from '@contentful/experience-builder-core';
 import { ResolveDesignValueType } from '@/hooks/useBreakpoints';
-import dragState from '@/shared/utils/dragState';
+import dragState from '@/utils/dragState';
 import { onDrop } from '@/shared/utils/onDrop';
 import { usePlaceholderStyle } from '@/hooks/usePlaceholderStyle';
 import { ROOT_ID } from '@/types/constants';

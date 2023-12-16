@@ -17,7 +17,7 @@ import {
 } from '@contentful/experience-builder-core';
 import { getDataFromTree } from '../shared/utils/utils';
 import { sendSelectedComponentCoordinates } from '@/communication/sendSelectedComponentCoordinates';
-import dragState from '@/shared/utils/dragState';
+import dragState from '@/utils/dragState';
 import { useTreeStore } from '@/store/tree';
 import { useEditorStore } from '@/store/editor';
 import { useDraggedItemStore } from '@/store/draggedItem';
