@@ -15,7 +15,7 @@ import { useShallow } from 'zustand/react/shallow';
 import { useStyleTag } from './useStyleTag';
 import { omit } from 'lodash';
 import { ResolveDesignValueType } from './useBreakpoints';
-import { getUnboundValues } from '@/shared/utils/getUnboundValues';
+import { getUnboundValues } from '@/utils/getUnboundValues';
 import { transformContentValue } from '@/shared/utils/transformers';
 
 import { DropZone } from '@components/DropZone/Dropzone';
