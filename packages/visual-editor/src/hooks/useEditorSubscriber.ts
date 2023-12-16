@@ -7,15 +7,13 @@ import {
   INTERNAL_EVENTS,
   VISUAL_EDITOR_EVENTS,
   Link,
-} from '@contentful/experience-builder-core';
-import {
+  getDataFromTree,
   INCOMING_EVENTS,
   OUTGOING_EVENTS,
   SCROLL_STATES,
   doesMismatchMessageSchema,
   tryParseMessage,
 } from '@contentful/experience-builder-core';
-import { getDataFromTree } from '../shared/utils/utils';
 import { sendSelectedComponentCoordinates } from '@/communication/sendSelectedComponentCoordinates';
 import dragState from '@/utils/dragState';
 import { useTreeStore } from '@/store/tree';

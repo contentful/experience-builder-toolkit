@@ -15,7 +15,7 @@ import {
 import { useMemo } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 import { useStyleTag } from './useStyleTag';
-import { omit } from 'lodash';
+import omit from 'lodash-es/omit';
 import { ResolveDesignValueType } from './useBreakpoints';
 import { getUnboundValues } from '@/utils/getUnboundValues';
 
