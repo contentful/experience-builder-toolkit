@@ -6,7 +6,7 @@ import DraggableContainer from '../Draggable/DraggableComponentList';
 import { CompositionTree, OUTGOING_EVENTS, sendMessage } from '@contentful/experience-builder-core';
 import { ResolveDesignValueType } from '@/hooks/useBreakpoints';
 import dragState from '@/utils/dragState';
-import { onDrop } from '@/shared/utils/onDrop';
+import { onDrop } from '@/utils/onDrop';
 import { usePlaceholderStyle } from '@/hooks/usePlaceholderStyle';
 import { ROOT_ID } from '@/types/constants';
 import { useTreeStore } from '@/store/tree';

@@ -1,8 +1,8 @@
 import { onComponentDropped } from '@/communication/onComponentDrop';
-import { getItem } from '../../utils/getItem';
+import { getItem } from './getItem';
 import { CompositionComponentNode, CompositionTree } from '@contentful/experience-builder-core';
-import { generateId } from '../../utils/generate-id';
-import { ROOT_ID } from '../../types/constants';
+import { generateId } from './generate-id';
+import { ROOT_ID } from '../types/constants';
 
 interface OnDropParams {
   data: CompositionTree;
