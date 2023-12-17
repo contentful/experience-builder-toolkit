@@ -39,30 +39,30 @@ export default [
     plugins: [dts()],
     external: [/.css/],
   },
-  {
-    input: 'src/renderApp.tsx',
-    output: [
-      {
-        file: './dist/renderApp.js',
-        format: 'esm',
-        sourcemap: true,
-      },
-    ],
-    plugins: [
-      postcss({
-        plugins: [postcssImport()],
-        inject(cssVariableName) {
-          return `import styleInject from 'style-inject';\nstyleInject(${cssVariableName});`;
-        },
-      }),
-      nodeResolve(),
-      commonjs(),
-      injectProcessEnv({
-        NODE_ENV: 'production',
-      }),
-      typescript({ tsconfig: './tsconfig.json' }),
-      terser(),
-    ],
-    external: [],
-  },
+  // {
+  //   input: 'src/renderApp.tsx',
+  //   output: [
+  //     {
+  //       file: './dist/renderApp.js',
+  //       format: 'esm',
+  //       sourcemap: true,
+  //     },
+  //   ],
+  //   plugins: [
+  //     postcss({
+  //       plugins: [postcssImport()],
+  //       inject(cssVariableName) {
+  //         return `import styleInject from 'style-inject';\nstyleInject(${cssVariableName});`;
+  //       },
+  //     }),
+  //     nodeResolve(),
+  //     commonjs(),
+  //     injectProcessEnv({
+  //       NODE_ENV: 'production',
+  //     }),
+  //     typescript({ tsconfig: './tsconfig.json' }),
+  //     terser(),
+  //   ],
+  //   external: [],
+  // },
 ];

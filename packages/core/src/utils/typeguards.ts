@@ -1,19 +1,15 @@
-import type { Entry } from 'contentful';
 import type { DeprecatedExperience, Experience, ExperienceEntry } from '@/types';
+import { Entry } from 'contentful';
 
-// @ts-expect-error type incompatibility
-export const isExperienceEntry = (entry: Entry): entry is ExperienceEntry => {
+export const isExperienceEntry = (entry: ExperienceEntry | Entry): entry is ExperienceEntry => {
   return (
     entry?.sys?.type === 'Entry' &&
     !!entry.fields?.title &&
     !!entry.fields?.slug &&
     !!entry.fields?.componentTree &&
-    // @ts-expect-error type incompatibility due to conditional types in Entry
-    Array.isArray(entry.fields.componentTree.breakpoints) &&
-    // @ts-expect-error type incompatibility due to conditional types in Entry
-    Array.isArray(entry.fields.componentTree.children) &&
-    // @ts-expect-error type incompatibility due to conditional types in Entry
-    typeof entry.fields.componentTree.schemaVersion === 'string'
+    Array.isArray((entry as ExperienceEntry).fields.componentTree.breakpoints) &&
+    Array.isArray((entry as ExperienceEntry).fields.componentTree.children) &&
+    typeof (entry as ExperienceEntry).fields.componentTree.schemaVersion === 'string'
   );
 };
 

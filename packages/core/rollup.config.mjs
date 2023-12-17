@@ -14,4 +14,17 @@ export default [
     plugins: [nodeResolve(), typescript({ tsconfig: './tsconfig.json' })],
     external: [/node_modules\/(?!tslib.*)/],
   },
+  {
+    input: 'src/constants.ts',
+    output: [
+      {
+        dir: 'dist',
+        format: 'esm',
+        sourcemap: true,
+        preserveModules: true,
+      },
+    ],
+    plugins: [nodeResolve(), typescript({ tsconfig: './tsconfig.json' })],
+    external: [/node_modules\/(?!tslib.*)/],
+  },
 ];

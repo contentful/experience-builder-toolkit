@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * danv:
  * NOTE!! The code commented here will be used in future. We commented it out to remove not yet fully unsupported parts
@@ -35,6 +34,7 @@ export type ComponentDefinitionVariableType =
   | 'Date'
   | 'Boolean'
   | 'Location'
+  | 'Media'
   | 'Object';
 // | 'Link'
 // | 'Array'
@@ -109,7 +109,8 @@ export type ComponentDefinition<
   name: string;
   category?: string;
   thumbnailUrl?: string;
-  variables: Record<string, ComponentDefinitionVariable<T>>;
+  variables: Partial<Record<ContainerStyleVariableName, ComponentDefinitionVariable<T>>> &
+    Record<string, ComponentDefinitionVariable<T>>;
   builtInStyles?: Array<keyof Omit<StyleProps, 'cfHyperlink' | 'cfOpenInNewTab'>>;
   children?: boolean;
 };
@@ -117,6 +118,10 @@ export type ComponentDefinition<
 export type ComponentRegistration = {
   component: React.ElementType;
   definition: ComponentDefinition;
+  options?: {
+    wrapComponent?: boolean;
+    wrapContainerTag?: keyof JSX.IntrinsicElements;
+  };
 };
 
 export type Binding = {
@@ -170,6 +175,11 @@ export type CompositionTree = {
 
 export type ExternalSDKMode = 'preview' | 'delivery';
 export type InternalSDKMode = ExternalSDKMode | 'editor';
+
+export enum VisualEditorMode {
+  LazyLoad = 'lazyLoad',
+  InjectScript = 'injectScript',
+}
 
 /**
  * Internally defined style variables are prefix with `cf` to avoid
@@ -255,6 +265,8 @@ export type Composition = {
   componentSettings?: ExperienceComponentSettings;
 };
 
+export type DesignTokensDefinition = { [key: string]: Record<string, string> };
+
 export type ExperienceEntry = {
   sys: Entry['sys'];
   fields: Composition;
@@ -320,3 +332,7 @@ export interface DeprecatedExperience {
    */
   mode: InternalSDKMode;
 }
+
+export type ValuesByBreakpoint =
+  | Record<string, CompositionVariableValueType>
+  | CompositionVariableValueType;

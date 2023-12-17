@@ -81,7 +81,7 @@ export const compositionEntry: ExperienceEntry = {
     },
   },
   metadata: { tags: [] },
-  fields: compositionFields,
+  fields: compositionFields as Composition,
 };
 
 type createCompositionEntryArgs = {

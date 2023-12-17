@@ -5,3 +5,4 @@ export * from './transformers';
 export * from './utils';
 export * from './typeguards';
 export * from './supportedModes';
+export * from './getValueForBreakpoint';
