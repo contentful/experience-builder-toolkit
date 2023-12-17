@@ -59,7 +59,8 @@ export interface ComponentDefinitionVariableBase<T extends ComponentDefinitionVa
   group?: 'style' | 'content';
   description?: string;
   displayName?: string;
-  defaultValue?: string | boolean | number | Record<any, any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  defaultValue?: string | boolean | number | Record<any, any>; //todo: fix typings
 }
 
 // export interface ComponentDefinitionVariableLink extends ComponentDefinitionVariableBase<'Link'> {
@@ -138,7 +139,8 @@ export type BindingMapByBlockId = Record<string, BindingMap>;
 
 export type DataSourceEntryValueType = Link<'Entry' | 'Asset'>;
 
-export type CompositionVariableValueType = string | boolean | number | Record<any, any> | undefined;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type CompositionVariableValueType = string | boolean | number | Record<any, any> | undefined; //todo: fix typings
 type CompositionComponentPropType =
   | 'BoundValue'
   | 'UnboundValue'
