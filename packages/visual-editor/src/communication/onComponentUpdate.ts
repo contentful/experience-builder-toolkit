@@ -1,4 +1,4 @@
-import { CompositionComponentNode } from '@contentful/experience-builder-core';
+import { CompositionComponentNode } from '@contentful/experience-builder-core/types';
 
 export const onComponentUpdate = ({
   node,

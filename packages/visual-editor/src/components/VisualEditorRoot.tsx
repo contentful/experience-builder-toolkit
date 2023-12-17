@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useEditorSubscriber } from '@/hooks/useEditorSubscriber';
-import {
-  OUTGOING_EVENTS,
-  EditorModeEntityStore,
-  sendMessage,
-} from '@contentful/experience-builder-core';
+import { EditorModeEntityStore, sendMessage } from '@contentful/experience-builder-core';
 import dragState from '@/utils/dragState';
 import { RootRenderer } from './RootRenderer/RootRenderer';
 import { useBreakpoints } from '@/hooks/useBreakpoints';
 import { useEditorStore } from '@/store/editor';
 import { useTreeStore } from '@/store/tree';
 import { simulateMouseEvent } from '@/utils/simulateMouseEvent';
+import { OUTGOING_EVENTS } from '@contentful/experience-builder-core/constants';
 
 export const VisualEditorRoot = () => {
   const initialized = useEditorSubscriber();

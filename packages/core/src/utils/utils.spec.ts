@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { CompositionComponentNode } from '../types';
-import { getInsertionData } from './utils';
+import { CompositionComponentNode } from '@/types';
+import { getInsertionData } from '@/utils';
 
 const dropReceiverChildNode: CompositionComponentNode = {
   type: 'block',

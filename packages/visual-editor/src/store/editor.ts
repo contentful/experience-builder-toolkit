@@ -1,9 +1,9 @@
-import {
+import { EditorModeEntityStore } from '@contentful/experience-builder-core';
+import type {
   ComponentRegistration,
   CompositionDataSource,
   CompositionUnboundValues,
-  EditorModeEntityStore,
-} from '@contentful/experience-builder-core';
+} from '@contentful/experience-builder-core/types';
 import { create } from 'zustand';
 
 export interface InitEditorParams {

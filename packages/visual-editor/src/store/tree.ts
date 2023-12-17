@@ -1,4 +1,4 @@
-import { Breakpoint, CompositionTree } from '@contentful/experience-builder-core';
+import type { Breakpoint, CompositionTree } from '@contentful/experience-builder-core/types';
 import { ROOT_ID } from '@/types/constants';
 import { create } from 'zustand';
 

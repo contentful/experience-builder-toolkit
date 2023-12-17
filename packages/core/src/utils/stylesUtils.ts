@@ -7,12 +7,12 @@ import {
   transformFill,
 } from './transformers';
 import {
-  CONTENTFUL_CONTAINER_ID,
   CSSProperties,
   StyleProps,
   CompositionComponentNode,
   CompositionVariableValueType,
-} from '../types';
+} from '@/types';
+import { CONTENTFUL_CONTAINER_ID } from '@/constants';
 
 const toCSSAttribute = (key: string) => key.replace(/[A-Z]/g, (m) => '-' + m.toLowerCase());
 

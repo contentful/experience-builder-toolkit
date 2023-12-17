@@ -1,5 +1,5 @@
-import { CONTENTFUL_CONTAINER_ID, LATEST_SCHEMA_VERSION } from '../../types';
-import { Composition, ExperienceEntry, SchemaVersions } from '../../types';
+import { CONTENTFUL_CONTAINER_ID, LATEST_SCHEMA_VERSION } from '@/constants';
+import { Composition, ExperienceEntry, SchemaVersions } from '@/types';
 import { entityIds } from './entities';
 
 const compositionFields: Composition = {

@@ -2,7 +2,7 @@ import { useEditorStore } from '@/store/editor';
 import {
   ComponentRegistration,
   CompositionComponentNode,
-} from '@contentful/experience-builder-core';
+} from '@contentful/experience-builder-core/types';
 import { useMemo } from 'react';
 import { ResolveDesignValueType } from './useBreakpoints';
 import { useComponentProps } from './useComponentProps';

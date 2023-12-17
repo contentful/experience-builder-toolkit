@@ -1,5 +1,3 @@
-import { InternalSDKMode } from './types';
-
 export const SCROLL_STATES = {
   Start: 'scrollStart',
   IsScrolling: 'isScrolling',
@@ -84,5 +82,3 @@ export const CF_STYLE_ATTRIBUTES = [
   'cfBackgroundImageAlignmentVertical',
   'cfBackgroundImageAlignmentHorizontal',
 ];
-
-export const supportedModes: InternalSDKMode[] = ['delivery', 'preview', 'editor'];

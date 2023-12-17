@@ -1,28 +1,34 @@
 import { useEffect, useState } from 'react';
-import { EditorModeEntityStore, sendMessage } from '@contentful/experience-builder-core';
 import {
-  CompositionComponentNode,
-  CompositionComponentPropValue,
-  CompositionTree,
-  INTERNAL_EVENTS,
-  VISUAL_EDITOR_EVENTS,
-  Link,
+  EditorModeEntityStore,
+  sendMessage,
   getDataFromTree,
-  INCOMING_EVENTS,
-  OUTGOING_EVENTS,
-  SCROLL_STATES,
   doesMismatchMessageSchema,
   tryParseMessage,
 } from '@contentful/experience-builder-core';
+import {
+  OUTGOING_EVENTS,
+  INTERNAL_EVENTS,
+  VISUAL_EDITOR_EVENTS,
+  INCOMING_EVENTS,
+  SCROLL_STATES,
+} from '@contentful/experience-builder-core/constants';
+import {
+  CompositionTree,
+  CompositionComponentNode,
+  CompositionComponentPropValue,
+} from '@contentful/experience-builder-core/types';
 import { sendSelectedComponentCoordinates } from '@/communication/sendSelectedComponentCoordinates';
 import dragState from '@/utils/dragState';
 import { useTreeStore } from '@/store/tree';
 import { useEditorStore } from '@/store/editor';
 import { useDraggedItemStore } from '@/store/draggedItem';
+import { Link } from 'contentful';
 
 export const designComponentsRegistry = new Map<string, Link<'Entry'>>([]);
 export const setDesignComponents = (designComponents: Link<'Entry'>[]) => {
   for (const designComponent of designComponents) {
+    //@ts-expect-error TODO: Fix typing
     designComponentsRegistry.set(designComponent.sys.id, designComponent);
   }
 };

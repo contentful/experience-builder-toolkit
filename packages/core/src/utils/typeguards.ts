@@ -1,5 +1,5 @@
 import type { Entry } from 'contentful';
-import type { DeprecatedExperience, Experience, ExperienceEntry } from './types';
+import type { DeprecatedExperience, Experience, ExperienceEntry } from '@/types';
 
 // @ts-expect-error type incompatibility
 export const isExperienceEntry = (entry: Entry): entry is ExperienceEntry => {

@@ -1,8 +1,8 @@
 import get from 'lodash/get';
-import {
+import type {
   CompositionUnboundValues,
   CompositionVariableValueType,
-} from '@contentful/experience-builder-core';
+} from '@contentful/experience-builder-core/types';
 
 export const getUnboundValues = ({
   key,

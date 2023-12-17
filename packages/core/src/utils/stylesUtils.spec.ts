@@ -1,6 +1,7 @@
-import { CompositionComponentNode, CONTENTFUL_CONTAINER_ID } from '../types';
+import { CompositionComponentNode } from '@/types';
 import { calculateNodeDefaultHeight } from './stylesUtils';
 import { describe, it, expect } from 'vitest';
+import { CONTENTFUL_CONTAINER_ID } from '@/constants';
 
 describe('calculateNodeDefaultHeight', () => {
   it('should return value when blockId is undefined', () => {

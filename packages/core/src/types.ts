@@ -6,7 +6,7 @@
 
 import type { ContentfulClientApi, Entry } from 'contentful';
 import type { EntityStore } from '@contentful/visual-sdk';
-import { SCROLL_STATES, OUTGOING_EVENTS, INCOMING_EVENTS, INTERNAL_EVENTS } from './constants';
+import { SCROLL_STATES, OUTGOING_EVENTS, INCOMING_EVENTS, INTERNAL_EVENTS } from '@/constants';
 
 type ScrollStateKey = keyof typeof SCROLL_STATES;
 export type ScrollState = (typeof SCROLL_STATES)[ScrollStateKey];
@@ -170,11 +170,6 @@ export type CompositionTree = {
 
 export type ExternalSDKMode = 'preview' | 'delivery';
 export type InternalSDKMode = ExternalSDKMode | 'editor';
-
-export enum VisualEditorMode {
-  LazyLoad = 'lazyLoad',
-  InjectScript = 'injectScript',
-}
 
 /**
  * Internally defined style variables are prefix with `cf` to avoid
